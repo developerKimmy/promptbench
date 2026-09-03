@@ -4,7 +4,7 @@
 
 > 관련 문서: 실험을 어떻게 설계할지(ablation, 반복 횟수, 후보 문구 작성 규칙 등)는
 > [`guideline.md`](guideline.md), 실제 관찰 결과·재현성 검증 로그는
-> [`baseline/scope-notes.md`](baseline/scope-notes.md) 참고.
+> [`notes/scope-notes.md`](notes/scope-notes.md) 참고.
 
 ## 요약
 
@@ -27,7 +27,12 @@ torchvision==0.28.0
 transformers==5.16.1
 accelerate==1.14.0
 gptqmodel==7.3.5
+pyyaml==6.0.3
+numpy==2.2.6
 ```
+
+`pyyaml`은 `config/layers.py`가 후보/고정 레이어 `.md` 파일의 frontmatter를 읽는 데,
+`numpy`는 `scripts/rank.py`가 4-2 ③(보수적 개선량, Jeffreys 사전분포)을 계산하는 데 씁니다.
 
 ### 왜 `autoawq`가 아니라 `gptqmodel`인가?
 
@@ -64,12 +69,15 @@ conda install -n harness -y "cuda-nvcc=13.0.88" "cuda-nvvm-dev_linux-64=13.0" -c
 ### 최초 실행 시 환경변수
 
 ```bash
-export CUDA_HOME=/home/kimmy/miniconda3/envs/harness
-export CXX=/home/kimmy/miniconda3/envs/harness/bin/x86_64-conda-linux-gnu-g++
-export CC=/home/kimmy/miniconda3/envs/harness/bin/x86_64-conda-linux-gnu-gcc
+conda activate harness
+export CUDA_HOME=$CONDA_PREFIX
+export CXX=$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-g++
+export CC=$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc
 ```
 
-이 세 변수는 **최초 1회 커널 컴파일에만** 필요합니다. 컴파일된 커널은
+`harness` 환경을 activate한 상태에서 `$CONDA_PREFIX`가 그 환경의 설치 경로를 가리키므로,
+사용자/머신마다 다른 conda 설치 위치를 하드코딩할 필요가 없습니다. 이 세 변수는 **최초 1회
+커널 컴파일에만** 필요합니다. 컴파일된 커널은
 `~/.cache/gptqmodel/torch_extensions/`에 캐시되므로, 이후 실행부터는 이 변수들 없이도 정상 동작합니다.
 
 > 만약 캐시가 지워지거나(`rm -rf ~/.cache/gptqmodel`), 다른 GPU/다른 CUDA 버전으로 옮기면
@@ -81,10 +89,15 @@ export CC=/home/kimmy/miniconda3/envs/harness/bin/x86_64-conda-linux-gnu-gcc
 
 ```bash
 conda activate harness
-cd /home/kimmy/project/promptbench
+cd path/to/promptbench   # 이 저장소의 로컬 경로
 python run_model.py "프롬프트 내용" --max-new-tokens 128
 python run_model.py "프롬프트 내용" --model Qwen/Qwen2.5-7B-Instruct-AWQ
+
+# 멀티라인/따옴표가 섞인 프롬프트는 쉘 이스케이핑이 번거로우니 파일로 넘기기
+python run_model.py --prompt-file prompt.txt --max-new-tokens 128
 ```
+
+`prompt`(위치 인자)와 `--prompt-file`은 동시에 줄 수 없습니다.
 
 ### 대화형 (반복 실행, 모델은 한 번만 로드)
 
@@ -103,64 +116,73 @@ python run_model.py
 - `exit` / `quit` 입력 또는 Ctrl+D로 종료
 - 각 프롬프트는 독립적으로 처리됨 (이전 대화 맥락 기억 안 함)
 
-### 배치 (JSON 질문 세트 → JSON 결과)
-
-`--input`에 질문 세트 JSON 파일을, `--output`에 결과를 저장할 경로를 지정하면
-모델을 한 번만 로드해서 모든 질문을 순차 처리하고 결과를 JSON으로 저장합니다.
-
-입력 형식: 문자열 리스트이거나, 텍스트 필드가 있는 객체 리스트. 객체에서 텍스트를 찾을 때
-`input` → `question` → `prompt` 순으로 키를 찾습니다. 객체의 다른 필드(`id` 등)는 그대로 유지되고
-`answer` 필드만 추가됩니다.
-
-```json
-[
-  "안녕, 너는 누구니?",
-  {"question": "1+1은 뭐야?"},
-  {"id": "case_01", "input": "..."}
-]
-```
-
-실행:
-
-```bash
-python run_model.py --input questions.json --output answers.json --max-new-tokens 128
-
-# 예: baseline/question.json ({"id", "input"} 형식) 처리
-python run_model.py --input baseline/question.json --output baseline/3b/json/baseline.json --max-new-tokens 200
-```
-
-출력 형식 (`answers.json`) — 원본 객체 필드 + `answer`:
-
-```json
-[
-  {"question": "1+1은 뭐야?", "answer": "..."},
-  {"id": "case_01", "input": "...", "answer": "..."}
-]
-```
-
-- `--input`을 쓰려면 `--output`도 반드시 같이 지정해야 함
-- 채점/정답 비교 기능은 아직 없음 — 질문/응답 수집만 함
-- `.md` 리포트가 자동으로 같이 생성됩니다. JSON은 `\n`이 이스케이프된 그대로 저장되지만
-  (프로그램에서 읽을 때 정상 처리됨), 사람이 원본 파일을 에디터로 열어 눈으로 검토하기엔
-  불편해서, 실제 줄바꿈으로 렌더링된 `.md` 리포트를 따로 남깁니다.
-  - **`--output`의 부모 폴더 이름이 `json`이면** (예: `.../json/baseline.json`), `.md`는
-    같은 이름으로 형제 폴더 `.../md/baseline.md`에 생성됩니다 (폴더가 없으면 자동 생성).
-  - 그 외의 경로면 예전처럼 같은 폴더에 확장자만 바꿔서 생성됩니다 (예: `answers.json` → `answers.md`).
-
 ### 시스템 프롬프트 (`--system-prompt`)
 
-단발성/대화형/배치 모든 모드에서 `--system-prompt "..."`로 시스템 프롬프트를 지정할 수 있습니다.
-지정하지 않으면 기존과 동일하게 시스템 메시지 없이 동작합니다.
+단발성/대화형 모드에서 `--system-prompt "..."`로 시스템 프롬프트를 지정할 수 있습니다.
+지정하지 않으면 기존과 동일하게 시스템 메시지 없이 동작합니다. 즉석에서 문구를 시험해볼 때만
+쓰고, `guideline.md` 절차를 따르는 정식 실험 데이터는 아래 `scripts/generate.py`로 생성하세요
+(레이어 문구를 파일로 고정해야 재현·재사용이 되기 때문).
 
 ```bash
-python run_model.py --input baseline/question.json \
-  --output harness/ablation/lang/3b/json/result.json \
-  --system-prompt "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요." \
-  --max-new-tokens 512
+python run_model.py "코드 리뷰해줘: ..." --system-prompt "항상 한국어로만 답변하세요."
 ```
 
-프롬프트 수정만으로 관찰된 실패(언어 혼입, 할루시네이션 등)가 얼마나 개선되는지 실험할 때 사용합니다.
-자세한 실험 결과는 `baseline/scope-notes.md` 참고.
+### 실험 데이터 생성 (`scripts/generate.py`)
+
+`guideline.md`의 phase 구조(baseline / phase1 / phase2)를 그대로 따라 `cases/cases.json`의
+케이스를 모델에 돌리고 결과를 `runs/` 아래 JSON으로 저장합니다. 시스템 프롬프트는 CLI로 직접
+넘기지 않고, `layers/candidates/{id}.md`(후보)·`layers/fixed/lang.md`(고정 레이어) 파일에서
+`config/layers.py`가 조립합니다 — 문구를 파일로 고정해 Phase 1/2 사이에 다시 쓰지 않기 위함
+(guideline.md 1-e).
+
+```bash
+# baseline: 고정 레이어도 후보도 없음
+python scripts/generate.py --phase baseline --model 3b --n 5
+
+# phase1: 후보 하나만 단독으로 (고정 레이어 없음, guideline.md 4-1)
+python scripts/generate.py --phase phase1 --model 3b --condition H --n 5
+
+# phase2: '+'로 이은 스택 (고정 레이어가 항상 마지막에 자동으로 붙음)
+python scripts/generate.py --phase phase2 --model 3b --condition H+S --n 5
+
+# 국지적 증량 (guideline.md 3-3): 특정 케이스만 N 추가 생성 (기존 run_idx 뒤에 이어붙음)
+python scripts/generate.py --phase phase1 --model 3b --condition H --case case_04 --n 5
+```
+
+- `--condition`은 baseline에는 불필요, phase1/phase2에는 필수
+- 후보 문구는 먼저 `layers/candidates/{id}.md`로 작성해야 함 (frontmatter: `id`, `target_cases`)
+- `--n`은 "추가로" 생성할 횟수 — 기존 `run_XXX.json`이 있으면 그 다음 번호부터 이어서 생성 (증분)
+- 결과는 케이스마다 항상 전체를 돌림 (0-B 규칙) — `--case`는 예산 부족 시 반복 횟수만 조절하는
+  3-3 증량 절차 전용이지, 케이스를 골라서 빼는 용도가 아님
+- 각 실행 파일에는 부록 A 스키마에 필요한 필드(`model`, `condition`, `fixed_layer`, `case_id`,
+  `run_idx`, `target_flag`, `gen_params` 등)가 자동으로 채워짐
+
+### 판정 (`scripts/judge.py`)
+
+`runs/`에 쌓인 결과를 조건을 가린 채(blind) 하나씩 보여주고 2-2의 3단계 판정(위반/애매/위반
+아님)과 2-4 사이드이펙트 등급을 입력받아 `judgments/`에 저장합니다.
+
+```bash
+python scripts/judge.py --phase phase1 --model 3b
+python scripts/judge.py --phase phase1 --model 3b --condition H   # 특정 조건만
+python scripts/judge.py --phase phase1 --model 3b --rejudge --frac 0.15  # 2-3 재판정 표본
+```
+
+- 아직 판정 안 된 항목만 무작위 순서로 큐에 올라감 (Ctrl+D로 중단해도 지금까지 판정한 건 저장됨)
+- `--rejudge`는 이미 판정된 항목 중 `--frac` 비율만큼 무작위로 다시 판정 큐에 올림 (결과는
+  `judgments/rejudge/`에 별도 저장 — 원 판정을 덮어쓰지 않음)
+
+### 집계 & 순위 (`scripts/build_index.py`, `scripts/rank.py`)
+
+```bash
+python scripts/build_index.py   # runs/ + judgments/ -> derived/index.csv (부록 A 스키마)
+python scripts/rank.py --model 3b --risk H:low,S:mid   # -> derived/ranking_3b.csv
+```
+
+- `build_index.py`는 재실행 시 매번 전체를 다시 만듦 (증분 아님) — `runs/`/`judgments/`가
+  갱신될 때마다 다시 돌리면 됨
+- `rank.py`의 `--risk`는 2-4 리스크 등급(낮음/중간/큼)을 조건별로 수동 지정 (아직 자동 분류
+  기능은 없음, 생략하면 전부 `low`로 취급). 4-2 ③의 보수적 개선량(부록 B)으로 정렬
 
 ### 생성 파라미터 (`GEN_PARAMS`)
 
@@ -183,65 +205,39 @@ GEN_PARAMS = {
   baseline과 후보 실행 사이에 이 값들이 달라지면 비교 자체가 무효가 됩니다. CLI 옵션으로 열어두면
   실행마다 실수로 다른 값을 넘길 통로가 생기므로, 아예 코드에 박아서 그런 실수가 원천적으로
   불가능하게 만들었습니다.
-- 배치 실행(`--input`/`--output`) 결과 JSON에는 각 항목마다 `gen_params` 필드가 자동으로 같이
-  저장됩니다 (`max_new_tokens`도 함께). 어떤 조건으로 생성됐는지 결과 파일만 보고도 바로 확인할 수
+- `scripts/generate.py`로 만든 실행 파일마다 `gen_params` 필드가 자동으로 같이 저장됩니다
+  (`max_new_tokens`도 함께). 어떤 조건으로 생성됐는지 결과 파일만 보고도 바로 확인할 수
   있습니다 (`guideline.md` 부록 A의 기록 스키마 요건).
 - 값을 바꿔야 한다면(예: 다른 모델 채용 등) `model/inference.py`의 `GEN_PARAMS`를 직접 수정하고,
   이후 실행되는 모든 baseline/후보 데이터가 같은 값을 쓰는지 반드시 확인하세요.
 
-### 결과 파일 구조: `baseline/` vs `harness/`
-
-`baseline/`은 **시스템 프롬프트 없는 순수 무개입 결과만** 담습니다. 하네스 후보 실험은
-`harness/` 아래 두 단계로 나눕니다 (자세한 방법론은 [`guideline.md`](guideline.md) 참고):
-
-- **`harness/ablation/{후보명}/`** — 1단계: 각 후보를 baseline에 **단독으로만** 얹어 개별
-  효과를 확인 (ablation). 아직 스태킹에 들어가지 않은 상태.
-- **`harness/stacked/{순번}_{후보명}/`** — 2단계: ablation 결과를 보고 "효과 크고 리스크
-  적은 순"으로 순서를 정해 누적. **언어 강제 지시는 규칙상 항상 마지막 번호로 고정.**
-
-각 결과 폴더 안에서는 `json/`과 `md/`를 분리합니다 (파일이 많아지면 두 형식이 섞여 있으면
-보기 어려워서 — `--output`을 `.../json/이름.json`으로 지정하면 위 규칙대로 `.md`가 자동으로
-`.../md/이름.md`에 생성됩니다).
+### 파일 구조
 
 ```
-baseline/
-  question.json             # 공통 입력 (모델 무관)
-  scope-notes.md             # 관찰 로그 (모델 무관)
-  3b/
-    json/baseline.json       # 시스템 프롬프트 없는 기본 baseline
-    md/baseline.md
-    repro/                    # 재현성 검증용 반복 실행 결과
-      json/baseline_1.json, baseline_2.json, ...
-      md/baseline_1.md, baseline_2.md, ...
-  7b/
-    json/baseline.json
-    md/baseline.md
-    repro/
-      json/...
-      md/...
+cases/cases.json            # 공통 입력 케이스 (모델 무관)
+notes/scope-notes.md         # 관찰 로그 (모델 무관)
 
-harness/
-  ablation/
-    lang/                    # 언어 강제 지시 후보 (단독 테스트, "항상 한국어로만 답변")
-      3b/
-        json/result.json
-        md/result.md
-        repro/
-          json/result_1.json, result_2.json, ...
-          md/result_1.md, result_2.md, ...
-      7b/
-        (동일 구조)
-    {다음 후보명}/             # 새 후보(할루시네이션 억제 등)는 여기 단독 테스트로 먼저 추가
-  stacked/                    # ablation 순서가 정해지면 여기 누적 (언어 지시는 항상 마지막)
+layers/
+  candidates/{id}.md         # 후보 레이어 (frontmatter: id, target_cases)
+  fixed/lang.md               # 고정 레이어 (guideline.md 4-1, 항상 스택 마지막)
+
+runs/                        # scripts/generate.py 출력 (원본 생성 결과, 판정 전)
+  baseline/{model}/{case_id}/run_001.json, run_002.json, ...
+  phase1/{model}/{condition}/{case_id}/run_001.json, ...
+  phase2/{model}/{stack_id}/{case_id}/run_001.json, ...   # stack_id 예: H+S
+
+judgments/                   # scripts/judge.py 출력 (부록 A의 judgment/side_effect 등)
+  {phase}/{model}/[condition/]{case_id}.jsonl
+  rejudge/{phase}/{model}/[condition/]{case_id}.jsonl     # 2-3 재판정 표본 (원본과 별도)
+
+derived/                     # scripts/build_index.py, scripts/rank.py 출력 (재생성 가능, git 미추적)
+  index.csv                  # runs + judgments 조인 (부록 A 스키마)
+  ranking_{model}.csv         # rank.py 결과 (4-2 순위)
 ```
 
-`repro/`는 같은 조건을 여러 번 반복 실행해서 결과가 매번 재현되는지 확인할 때 씁니다 (언어 혼입처럼
-확률적으로 나타나는 현상은 1회 실행만으로 결론 내리면 안 됨 — `baseline/scope-notes.md`의
-"재현성 검증" 섹션 참고). 파일명은 `{조건}_{반복번호}.json`.
-
-새 baseline 반복은 `baseline/{모델}/repro/json/baseline_{n}.json`, 새 ablation 후보는
-`harness/ablation/{후보명}/{모델}/json/result.json` (+ `repro/json/result_{n}.json`)로
-저장하세요. `.md`는 자동으로 형제 `md/` 폴더에 생성됩니다.
+`condition`은 phase1에서는 후보 ID 하나(`H`), phase2에서는 `+`로 이은 스택 ID(`H+S`)입니다.
+baseline에는 조건이 없어 `condition` 레벨 디렉토리가 빠집니다. 같은 (phase, model, condition,
+case_id) 조합에 반복 생성하면 `run_XXX.json` 번호가 이어서 붙습니다 (3-3 증량 시 재사용).
 
 > `harness` 환경엔 `python`이 `python3`(3.12)를 가리키는 심볼릭 링크로 이미 걸려 있어 `python3` 대신 `python`으로 써도 됩니다.
 

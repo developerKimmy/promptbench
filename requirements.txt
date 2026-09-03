@@ -9,3 +9,7 @@ accelerate==1.14.0
 # AWQ quantized model loading backend
 # (transformers 5.x uses gptqmodel for AWQ, NOT the deprecated `autoawq` package)
 gptqmodel==7.3.5
+
+# Experiment tooling (scripts/, config/layers.py) — guideline.md 방법론 구현
+pyyaml==6.0.3
+numpy==2.2.6

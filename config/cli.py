@@ -11,20 +11,17 @@ def parse_args():
         default=None,
         help="User prompt to send to the model. Omit to start an interactive session.",
     )
+    parser.add_argument(
+        "--prompt-file",
+        default=None,
+        help="Path to a file containing the prompt, as an alternative to the positional "
+        "prompt arg (handy for multi-line or quote-heavy prompts). Mutually exclusive with it.",
+    )
     parser.add_argument("--model", default=DEFAULT_MODEL, help="HF model id (default: %(default)s)")
     parser.add_argument("--max-new-tokens", type=int, default=256)
     parser.add_argument(
-        "--input",
-        help="Path to a JSON file containing questions to run in batch (a list of strings, "
-        "or a list of objects with a 'question' or 'prompt' key). Requires --output.",
-    )
-    parser.add_argument(
-        "--output",
-        help="Path to write batch results as JSON (list of {question, answer}). Requires --input.",
-    )
-    parser.add_argument(
         "--system-prompt",
         default=None,
-        help="Optional system prompt prepended to every request (single-shot, interactive, and batch).",
+        help="Optional system prompt prepended to every request (single-shot and interactive).",
     )
     return parser.parse_args()

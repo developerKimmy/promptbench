@@ -968,3 +968,18 @@ case_01/03/04/10(7B ablation_lang)이 전부 비슷하게 3~4/10 수준으로, *
 - 위 검증 후, 모델별로 다른 하네스를 적용할지(3B용/7B용 분리) 최종 결정
 - `harness/ablation/`에 다음 후보를 추가 설계할 때 이번 발견(케이스 국한이 아닌 전역적 확률
   현상) 반영 필요
+
+## 2026-09-03 업데이트 — 디렉토리 재구성 및 도구화
+
+- `baseline/question.json` → `cases/cases.json`, 이 문서(`baseline/scope-notes.md`) →
+  `notes/scope-notes.md`로 이동. 위 본문의 `baseline/lang_test*`, `lang_test_1~3` 등 경로
+  표현은 그 이전 시점의 이력이라 그대로 남겨둠 (749~761줄 자체 정정 안내 참고).
+- `guideline.md` 절차(baseline → phase1 → phase2, judge, rank)를 실행하는 도구 일체를
+  신규 작성: `config/layers.py`, `config/models.py`, `scripts/generate.py`,
+  `scripts/judge.py`, `scripts/build_index.py`, `scripts/rank.py`. 앞으로의 후보 검증은
+  이 스크립트들로 진행 (`SETUP.md` "실험 데이터 생성" 이하 참고).
+- 위 "언어 강제 지시" 결론을 근거로 `layers/fixed/lang.md`를 고정 레이어로 등록함.
+  **다만 주의**: `guideline.md`는 고정 레이어를 "이미 별도 검증이 끝난 지시"로 정의하는데,
+  이 문서의 최종 결론(937~951줄)은 **7B에 대해서는 그렇게 단정하기 어렵다**는 쪽에 가깝다.
+  3B는 code_fix 트레이드오프를 감수하면 대체로 유효, 7B는 여전히 미해결 과제로 남아있음 —
+  `layers/fixed/lang.md`를 그대로 최종 확정할지, 7B용 보강 후 확정할지는 아직 결정 안 됨.
