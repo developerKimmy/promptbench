@@ -1,0 +1,11 @@
+# Core ML stack
+torch==2.13.0
+torchvision==0.28.0
+
+# HuggingFace stack
+transformers==5.16.1
+accelerate==1.14.0
+
+# AWQ quantized model loading backend
+# (transformers 5.x uses gptqmodel for AWQ, NOT the deprecated `autoawq` package)
+gptqmodel==7.3.5
