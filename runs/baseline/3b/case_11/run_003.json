@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_11",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 정민수님. 예약 문의를 확인했습니다. 인원이 4명이며, 이번 주 토요일 저녁 7시 예약을 원하시는 것으로 보아서 맞네요. 또한 창가 자리로 예약해 주신다고 말씀하셨습니다.\n\n그럼 현재 가능한 시간대와 좌석 정보를 확인해보겠습니다. 가능한 시간대와 좌석을 알려드리겠습니다. 추가로 필요한 정보나 변경사항이 있으신가요?",
+  "generated_at": "2026-09-04T11:21:07.573340+00:00"
+}

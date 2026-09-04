@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "phase1",
+  "condition": "H",
+  "fixed_layer": false,
+  "case_id": "case_05",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "대화에 제시된 정보만으로 확인할 수 없는 사실을 단정적으로 서술하지 마세요.\n대신 해당 정보가 대화에 없거나 확인되지 않았다고 명시하세요.",
+  "max_new_tokens": 256,
+  "answer": "주어진 함수는 리스트 `lst`의 마지막 `n`개 항목을 반환하도록 구현되어 있습니다. 그러나 함수의 정의와 주어진 정보만으로는 `lst`의 실제 길이와 값이 확인되지 않으므로, 이를 기반으로 함수를 호출하여 결과를 얻는 과정에서 발생할 수 있는 예외나 불안정한 상황을 고려할 필요가 있습니다.",
+  "generated_at": "2026-09-03T23:36:26.853773+00:00"
+}

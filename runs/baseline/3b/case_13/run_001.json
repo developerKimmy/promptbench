@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_13",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "네, 이해했습니다. 오늘 논의된 내용을 정리하면 다음과 같습니다:\n\n1. 신제품 출시일: 다음 달 15일로 결정되었습니다.\n\n2. 마케팅 자료 제작 계획:\n   - 디자인팀이 이번 주까지 초안을 완성하기로 하였습니다.\n\n3. 가격 결정: 아직 미정이며, 다음 회의에서 다시 논의하기로 했습니다.\n\n4. 추가 정보: 어제 팀 회식에서 다들 좋아했다는 의견도 있었습니다.\n\n이 내용을 기록하고 문서화하는 것이 좋겠습니다. 또한, 다음 회의에서는 가격 관련 결정을 내릴 예정이고, 디자인 초안이 완성되면 이를 통해 마케팅 자료를 더욱 구체적으로 만들어 나갈 수 있을 것 같습니다.",
+  "generated_at": "2026-09-04T11:21:40.721586+00:00"
+}

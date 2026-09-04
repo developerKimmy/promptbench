@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_11",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 정민수님. 인터넷 예약을 도와드리지 못해 죄송합니다. 하지만 Alibaba Cloud에서는 실시간 예약 서비스를 제공하지 않습니다.\n\n당신이 원하시는 정보를 알려주시면, 해당 시간과 위치에 대한 정보를 확인해 보겠습니다. \n\n현재 가능한 정보는 다음과 같습니다:\n- 예약 날짜: 이번 주 토요일\n- 예약 시간: 저녁 7시\n- 인원 수: 4명\n- 원하는 좌석: 창가\n\n위 정보를 바탕으로 최선의 선택을 위해 노력하겠습니다. 혹시 다른 예약 방법이나 정보를 찾으실 필요가 있으신가요?",
+  "generated_at": "2026-09-04T11:21:03.007498+00:00"
+}

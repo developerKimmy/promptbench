@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 4,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "알겠습니다, 환불流程를 알려드릴게요. 하지만 먼저 주문 번호를 확인하는 것이 가장 먼저 해야 할 점입니다. 혹시 쇼핑몰이나 e-commerce 플랫폼에서 메일을 받았거나, 해당 메일에서 주문 번호가 적혀있는지 확인해보세요. \n\n그렇게도 확인되지 않는다면, 고객센터에 문의해보세요. 고객센터에서는 주문 번호와 주문 내용을 확인하여 환불 절차를 진행할 수 있습니다. 주문 날짜와 시간, 그리고 사이즈 불matched 문제 등을 설명해주시면 더욱 명확하게 처리할 수 있을 것입니다.\n\n현재 시간이 지났다면, 고객센터 연락처를 확인해보세요. 일반적으로 주말이나 공휴일에는 고객센터가 영업하지 않을 수 있으니, 가능하다면 귀하의 위치에 맞는 시간대에 연락처를 찾아보세요.\n\n환불 절차가 빠르게 이루어질 수 있도록 최선을 다하겠습니다. 화가 많이 난 것 같아 속상해하는데, 환불 요청이 이루어지는 즉시 알려주시면",
+  "generated_at": "2026-09-04T11:13:55.956499+00:00"
+}

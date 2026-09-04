@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_10",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "알겠습니다, 이해했습니다. 서버 장애와 관련된 정보가 주어졌네요. 메모리 누수가 근본 원인으로 밝혀졌으며, 개발팀이 다음 스프린트에 이를 수정하기로 결정했습니다.\n\n또한, 모니터링 대시보드 개발에 대한 제안도 있었습니다. 하지만 아직 일정이 미지근한 것으로 보입니다.\n\n더 구체적인 상황이나 필요한 정보가 더 있으신가요? 또는 어떤 면에서 도움이 필요하신가 궁금합니다.",
+  "generated_at": "2026-09-04T11:20:25.496953+00:00"
+}

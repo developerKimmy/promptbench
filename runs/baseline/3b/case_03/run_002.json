@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_03",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 박영희님. 주문 조정을 도와드릴 수 있습니다. 현재 주문 상황이 다음과 같습니다:\n\n1. 주문 수: 3개\n2. 취소 요청: 2개\n3. 배송지: 동일\n\n취소를 원하시는 두 개의 주문에 대해 확인해주시겠어요? 각각의 주문 번호나 상품 정보를 알려주시면, 가능한 최선의 방법으로 처리하겠습니다.",
+  "generated_at": "2026-09-04T11:14:37.677140+00:00"
+}

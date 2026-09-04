@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_08",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "알겠습니다, 이해했습니다. 다음 주까지 철수님과 영희님의 작업 계획을 확인해주셔야 할 것 같습니다. 또한, 지난주 회식에 대한 피드백이 좋았다는 점도 기억하시고 다음 회의 준비에 참고해주실 거라고 말씀드리면 될 것 같습니다. 다음 회의는 다다음주 화요일 오후 2시로 예정되어 있습니다.\n\n또한, 해당 내용을 문서화하거나 메모로 남길 필요가 있다면, 그 부분도 확인하실 수 있도록 도와드리겠습니다. 혹시 다른 요청사항이나 추가 정보가 있으신지 알려주시면 감사하겠습니다.",
+  "generated_at": "2026-09-04T11:18:36.528423+00:00"
+}

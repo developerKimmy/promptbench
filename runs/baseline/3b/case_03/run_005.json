@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_03",
+  "run_idx": 5,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "네, 알겠습니다. 박영희님의 요청사항을 이해했습니다. 현재 주문 중인 3개 중에서 2개를 취소하고 싶으시다고 말씀하셨네요. 배송지는 변경되지 않도록 하겠습니다.\n\n취소를 진행하시려면, 해당 상점이나 온라인 쇼핑 플랫폼에서 \"주문 취소\" 또는 \"취소/교환/반품\" 메뉴를 찾아 확인해보시기 바랍니다. 취소流程는 상황에 따라 다를 수 있으니, 관련 규정과 절차를 체크해주시면 감사하겠습니다.\n\n취소를 완료하신 후, 언제든지 추가 주문이나 문의사항이 있으시면 언제든 알려주세요. 궁금한 점이 있으면 언제든지 물어보실 수 있습니다.",
+  "generated_at": "2026-09-04T11:14:55.384942+00:00"
+}

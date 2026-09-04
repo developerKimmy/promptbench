@@ -1,0 +1,23 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_11",
+  "run_idx": 5,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 정민수님. 인터넷 예약을 진행해주시면 저희에게 많은 정보를 제공해주셔서 감사합니다. \n\n현재 저희 곳에서 이번주 토요일 저녁 7시 예약 가능한 좌석은 없지만, 저희 관리자에게您的留言를 전달하여 가능한 한 최선을 다해 요청해보겠습니다.\n\n또한, 창가로 예약하시려는 말씀이신데, 이 또한 현재 가능한 좌석을 제외하고 요청하겠습니다.\n\n예약 상세 정보를 확인하기 위해 필요한 추가 정보나 변경 사항이 있으신 경우 언제든지 알려주세요.",
+  "generated_at": "2026-09-04T11:21:17.311410+00:00"
+}
