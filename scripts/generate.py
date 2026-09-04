@@ -61,7 +61,7 @@ def main():
     if args.phase != "baseline" and not args.condition:
         raise SystemExit(f"--phase {args.phase}는 --condition이 필요합니다")
 
-    system_prompt, fixed_layer = resolve_system_prompt(args.phase, args.condition)
+    system_prompt, fixed_layer = resolve_system_prompt(args.phase, args.condition, args.model)
 
     all_cases = load_cases()
     if args.case is not None:

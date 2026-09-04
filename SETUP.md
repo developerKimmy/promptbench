@@ -83,6 +83,39 @@ export CC=$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc
 > 만약 캐시가 지워지거나(`rm -rf ~/.cache/gptqmodel`), 다른 GPU/다른 CUDA 버전으로 옮기면
 > 재컴파일이 필요하므로 위 환경변수를 다시 export 해야 합니다.
 
+### ⚠️ WSL 자체가 죽는 문제 (2026-09-04 확인, 해결됨)
+
+첫 로드 시 Marlin 커널 JIT 컴파일 중 **WSL 전체가 멎거나 재부팅되는 현상**이 발생할 수 있습니다.
+
+**원인**: `cuda-nvcc` conda 패키지의 activate 스크립트
+(`$CONDA_PREFIX/etc/conda/activate.d/~cuda-nvcc_activate.sh`)가 `TORCH_CUDA_ARCH_LIST`/
+`CUDAARCHS`를 값이 비어 있을 때 **9개 아키텍처짜리 범용 기본값**
+(`7.5;8.0;8.6;8.9;9.0;10.0;10.3;12.0;12.1+PTX`)으로 자동 설정합니다. 이 머신 GPU는 RTX 3060
+(Ampere, compute_86) 하나뿐인데도 JIT 컴파일이 9개 아키텍처 전부를 대상으로 `cudafe++`/`cicc`를
+병렬로 여러 개 띄우면서, WSL에 할당된 RAM(12GB) + swap(8GB)을 순식간에 소진 → 커널 OOM
+캐스케이드로 WSL VM 자체가 응답 불능/재부팅됨. (`journalctl -b -1`에서
+`cicc invoked oom-killer`, `Free swap = 0kB` 등으로 확인)
+
+**해결**: 아키텍처를 실제 GPU 하나로 고정합니다. `export`는 그 세션에만 적용되고
+`conda activate`할 때마다 cuda-nvcc의 activate.d 스크립트가 다시 9-아키텍처 기본값을
+깔아버리므로(값이 비어 있을 때만 채우는 방식이라, 먼저 값을 정해두면 덮어쓰지 않음),
+**`~/.bashrc`에 conda initialize 블록 바로 뒤 영구로 박아둠** (2026-09-04 조치 완료):
+
+```bash
+export TORCH_CUDA_ARCH_LIST=8.6
+export CUDAARCHS=86-real
+export MAX_JOBS=4   # ninja 병렬 컴파일 개수 제한 (안전 마진)
+```
+
+→ 이제 새 터미널을 열 때마다 자동 적용되므로 실행할 때마다 손으로 export할 필요 없음.
+다른 GPU로 옮기면 이 값(`8.6`/`86-real`)을 그 GPU의 compute capability로 바꿔야 합니다.
+
+캐시가 깨졌을 수 있으므로 문제를 겪었다면 재컴파일 전에 한 번 지워주세요:
+`rm -rf ~/.cache/gptqmodel/torch_extensions/marlin_fp16`
+
+다른 GPU로 옮길 경우 `TORCH_CUDA_ARCH_LIST`/`CUDAARCHS` 값을 그 GPU의 compute capability로
+바꿔야 합니다 (예: Ada Lovelace는 `8.9`/`89-real`).
+
 ## 3. 실행
 
 ### 단발성 (프롬프트를 인자로 전달)
@@ -131,7 +164,7 @@ python run_model.py "코드 리뷰해줘: ..." --system-prompt "항상 한국어
 
 `guideline.md`의 phase 구조(baseline / phase1 / phase2)를 그대로 따라 `cases/cases.json`의
 케이스를 모델에 돌리고 결과를 `runs/` 아래 JSON으로 저장합니다. 시스템 프롬프트는 CLI로 직접
-넘기지 않고, `layers/candidates/{id}.md`(후보)·`layers/fixed/lang.md`(고정 레이어) 파일에서
+넘기지 않고, `layers/candidates/{id}.md`(후보)·`layers/fixed/{id}.md`(고정 레이어) 파일에서
 `config/layers.py`가 조립합니다 — 문구를 파일로 고정해 Phase 1/2 사이에 다시 쓰지 않기 위함
 (guideline.md 1-e).
 
@@ -142,7 +175,7 @@ python scripts/generate.py --phase baseline --model 3b --n 5
 # phase1: 후보 하나만 단독으로 (고정 레이어 없음, guideline.md 4-1)
 python scripts/generate.py --phase phase1 --model 3b --condition H --n 5
 
-# phase2: '+'로 이은 스택 (고정 레이어가 항상 마지막에 자동으로 붙음)
+# phase2: '+'로 이은 스택 뒤에 그 모델의 고정 레이어가 자동으로 붙음 (아래 참고)
 python scripts/generate.py --phase phase2 --model 3b --condition H+S --n 5
 
 # 국지적 증량 (guideline.md 3-3): 특정 케이스만 N 추가 생성 (기존 run_idx 뒤에 이어붙음)
@@ -151,6 +184,12 @@ python scripts/generate.py --phase phase1 --model 3b --condition H --case case_0
 
 - `--condition`은 baseline에는 불필요, phase1/phase2에는 필수
 - 후보 문구는 먼저 `layers/candidates/{id}.md`로 작성해야 함 (frontmatter: `id`, `target_cases`)
+- **어떤 모델에 어떤 고정 레이어가 붙는지는 `config/fixed_layers.yaml`이 결정**합니다
+  (`{모델: [id, ...]}`). guideline.md 용어 정의상 "검증 완료"는 모델 단위로 성립하므로,
+  한 모델에서 검증된 지시가 다른 모델에서는 아직 후보 상태일 수 있습니다 — 그 경우 그 모델
+  줄을 빈 리스트로 둡니다 (예: `harness/ablation/lang/7b`에서 재현된 역할 붕괴 부작용 때문에
+  `7b: []`, `notes/scope-notes.md` 2026-09-04 항목 참고). phase2에서 `--model`별로 이
+  파일만 읽으므로, 목록이 바뀌어도 코드 수정 없이 이 YAML만 고치면 됩니다.
 - `--n`은 "추가로" 생성할 횟수 — 기존 `run_XXX.json`이 있으면 그 다음 번호부터 이어서 생성 (증분)
 - 결과는 케이스마다 항상 전체를 돌림 (0-B 규칙) — `--case`는 예산 부족 시 반복 횟수만 조절하는
   3-3 증량 절차 전용이지, 케이스를 골라서 빼는 용도가 아님
@@ -217,9 +256,11 @@ GEN_PARAMS = {
 cases/cases.json            # 공통 입력 케이스 (모델 무관)
 notes/scope-notes.md         # 관찰 로그 (모델 무관)
 
+config/fixed_layers.yaml     # {모델: [고정 레이어 id, ...]} — 모델별 고정 레이어 목록
+
 layers/
   candidates/{id}.md         # 후보 레이어 (frontmatter: id, target_cases)
-  fixed/lang.md               # 고정 레이어 (guideline.md 4-1, 항상 스택 마지막)
+  fixed/{id}.md                # 고정 레이어 본문 (어떤 모델에 붙는지는 위 yaml이 결정)
 
 runs/                        # scripts/generate.py 출력 (원본 생성 결과, 판정 전)
   baseline/{model}/{case_id}/run_001.json, run_002.json, ...
