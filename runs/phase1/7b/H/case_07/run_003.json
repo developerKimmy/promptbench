@@ -1,0 +1,23 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "phase1",
+  "condition": "H",
+  "fixed_layer": false,
+  "case_id": "case_07",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "대화에 제시된 정보만으로 확인할 수 없는 사실을 단정적으로 서술하지 마세요.\n대신 해당 정보가 대화에 없거나 확인되지 않았다고 명시하세요.",
+  "max_new_tokens": 256,
+  "answer": "이 함수는 주어진 이메일 주소가 \"@\" 기호를 포함하고 있는지 확인합니다. 만약 \"@\"가 포함되어 있다면 `True`를 반환하고, 그렇지 않다면 `False`를 반환합니다. 그러나 이 함수는 다음과 같은 점들을 검증하지 못합니다:\n\n- \"@\": 이 기호가 실제로 이메일 주소의 일부이며, 일반적으로 도메인 이름과 사용자 이름 사이에 위치해야 합니다.\n- 이메일 형식: \".com\", \".net\"와 같은 도메인 이름이 올바르게 포함되어 있는지 확인하지 않습니다.\n- 정확한 이메일 구조: 예를 들어, 이메일 주소가 \"@example.com\"과 같이 올바르게 구성되어 있는지 확인하지 않습니다.\n\n따라서 이 함수는 \"@\" 기호의 존재만을 확인하며, 실제 이메일 주소의 유효성을 완전히 검증하는 데는 충분하지 않습니다.",
+  "generated_at": "2026-09-05T02:00:04.371189+00:00"
+}

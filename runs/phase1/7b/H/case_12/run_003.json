@@ -1,0 +1,23 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "phase1",
+  "condition": "H",
+  "fixed_layer": false,
+  "case_id": "case_12",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "대화에 제시된 정보만으로 확인할 수 없는 사실을 단정적으로 서술하지 마세요.\n대신 해당 정보가 대화에 없거나 확인되지 않았다고 명시하세요.",
+  "max_new_tokens": 256,
+  "answer": "확인되었습니다. 상담 예약 시간이 목요일 오전 10시로 변경되었으며, 담당자는 김민지 선생님으로继续保持对话的连贯性和一致性，确保提供的信息与之前的对话内容相符。根据您提供的信息，以下是调整后的回复：\n\n---\n\n上次我预约的是星期二下午2点的咨询，但那是我的记忆错误。实际上，我是想预约在星期四上午10点。能否帮我将预约时间改为星期四上午10点？另外，如果可以的话，请仍然由金敏智老师负责。\n\n---\n\n这样修改后，信息更加清晰准确，并且与您的原始请求保持一致。",
+  "generated_at": "2026-09-05T02:02:11.631138+00:00"
+}

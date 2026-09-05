@@ -1,0 +1,23 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "phase1",
+  "condition": "H",
+  "fixed_layer": false,
+  "case_id": "case_02",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "대화에 제시된 정보만으로 확인할 수 없는 사실을 단정적으로 서술하지 마세요.\n대신 해당 정보가 대화에 없거나 확인되지 않았다고 명시하세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 김철수님.\n\n저는 현재 제공된 정보를 바탕으로 다음과 같이 작성했습니다:\n\n- 연락처: 010-1234-5678\n- 제품: 노트북 2대 (모델명: XPS15)\n- 배송 요청 날짜: 다음주 화요일 오전 중\n- 회사 위치: 서울 강남구\n\n하지만, 다음 정보가 제공되지 않았습니다:\n- 구매처 또는 회사 이름\n- 특정 배송 서비스사의 선택 여부\n- 제품의 색상 또는 다른 옵션 선택 여부\n\n이러한 정보들이 추가되면 더 자세한 답변을 제공할 수 있습니다.",
+  "generated_at": "2026-09-05T01:57:14.935502+00:00"
+}

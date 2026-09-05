@@ -1,0 +1,23 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "phase": "phase1",
+  "condition": "H",
+  "fixed_layer": false,
+  "case_id": "case_12",
+  "run_idx": 4,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "대화에 제시된 정보만으로 확인할 수 없는 사실을 단정적으로 서술하지 마세요.\n대신 해당 정보가 대화에 없거나 확인되지 않았다고 명시하세요.",
+  "max_new_tokens": 256,
+  "answer": "上次的预约是在上周五下午2点，但那是我的记忆出现了偏差。实际上，预约是在本周三上午10点。能否将预约时间更改为本周三上午10点？同时，请保持预约的老师是金敏智老师。",
+  "generated_at": "2026-09-05T02:02:13.541009+00:00"
+}
