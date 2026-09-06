@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import json
 import sys
 from datetime import datetime, timezone
@@ -75,6 +76,9 @@ def main():
 
     model_info = resolve_model(args.model)
     tokenizer, model = load_model(model_info["hf_id"])
+    chat_template_sha = hashlib.sha256(
+        (tokenizer.chat_template or "").encode("utf-8")
+    ).hexdigest()[:12]
 
     for case in cases:
         case_id = case["id"]
@@ -92,6 +96,7 @@ def main():
                 "hf_id": model_info["hf_id"],
                 "quant": model_info["quant"],
                 "runtime_version": transformers.__version__,
+                "chat_template_sha": chat_template_sha,
                 "phase": args.phase,
                 "condition": args.condition,
                 "fixed_layer": fixed_layer,

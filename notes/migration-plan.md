@@ -96,45 +96,68 @@ held-out 케이스는 계속 비교 불가 상태로 남는다. 권장하지 않
 ### 순서 (의존 관계 기준)
 
 ```
-0. layers/candidates/lang.md 작성 (전제조건 — 이게 없으면 1도 못함)
+0. layers/candidates/lang.md 작성 (target_cases: [], D2 확정)
+   layers/candidates/_null.md 작성 (통제 조건, D6 확정 — 이미 완료)
    ↓
-1. 7B baseline 재생성 (runs/baseline/7b/, 13케이스, N=5)
+1. 7B baseline 재생성 (N=5) + 7B _null 재생성 (N=5, D6, 같은 세션)
    ↓
-2. 3B lang phase1 재생성 (runs/phase1/3b/lang/, 10케이스, N=5)
-   3. 7B lang phase1 재생성 (runs/phase1/7b/lang/, 13케이스, N=5)   [2, 3은 병렬 가능]
+2. 3B lang phase1 재생성 (N=5)
+   3. 7B lang phase1 재생성 (N=10, D1)   [2, 3은 병렬 가능]
    ↓
 4. 구식 데이터와 신규 데이터 대조 (아래 "검증 기준" 참고)
    ↓
 5. 대조 통과 시 구식 디렉토리 아카이브 처리
 ```
 
+**주의 — `--n`은 `generate.py`의 필수 인자**(`required=True`). 아래 각 단계 명령에
+`--n <값>` 반드시 포함해야 함 (값은 "D1" 참고).
+
+## 코드 레벨 함정 (2026-09-06 코드 확인으로 발견)
+
+- `rank.py:101-103`: `target_case_ids = {r["case_id"] for r in rows if r["target_flag"] == "True"}`
+  다음 `if not target_case_ids: continue`. `lang.md`에 `target_cases`가 비어 있으면
+  모든 run의 `target_flag`가 `False`가 되어 lang 조건 전체가 **에러 없이 조용히**
+  순위표에서 빠진다. → 0-1단계에서 `target_cases`를 반드시 채워야 함.
+- `judgments/`, `derived/`는 이미 존재하지만(디렉토리 자체는 있음) **내용이 0건**
+  (`derived/index.csv`, `derived/ranking_3b.csv`는 헤더만, `judgments/`는 판정 파일
+  없음). 현재 생성된 run 180개(baseline 65 + phase1 115)에 대한 정식 판정이
+  하나도 없는 상태 — 마이그레이션과 별개로 이미 쌓여있는 백로그.
+
 ### 0단계 — `layers/candidates/lang.md` 작성
 
-`layers/fixed/lang.md`의 본문을 그대로 가져오되, 후보 파일 스키마(frontmatter:
-`target_cases` 등)에 맞춰 작성. **주의**: `guideline.md` 1-e에 따르면 후보 문구는
-고정 레이어가 담당하는 내용(출력 언어)을 언급하면 안 되는데, lang 자체가 언어 지시이므로
-이 규칙의 예외로 남긴다는 점을 frontmatter나 주석에 명시해야 함 (재검증용 후보이지 stacking용
-신규 후보가 아니므로).
+`layers/fixed/lang.md`의 본문을 그대로 가져오되, 후보 파일 스키마(frontmatter: `id`,
+`target_cases`)에 맞춰 작성. `target_cases: []`로 둔다 (D2, 아래 "Day 0 결정" 참고).
 
-### 1단계 — 7B baseline
+**주의 — 파일 안에 설명 주석을 넣지 말 것**: `config/layers.py`의 `load_layer_file`은
+frontmatter(`---` 두 줄 사이) 뒤의 나머지 전체를 그대로 시스템 프롬프트 본문으로 쓴다.
+HTML 주석이든 뭐든 frontmatter 밖에 적으면 **모델에게 그대로 전송된다** (`_null.md`
+작성 중 실제로 이 실수를 할 뻔해서 확인함). lang이 "이미 3B에서는 확정, 7B에서만
+재검증 중"인 특수 상태라는 설명은 파일에 안 넣고 `notes/scope-notes.md`에만 남긴다
+(H.md도 같은 방식 — 파일엔 지시문뿐이고 근거는 scope-notes.md에 있음).
+
+### 1단계 — 7B baseline (+ D6 통제 조건)
 
 ```
-python scripts/generate.py --phase baseline --model 7b
+python scripts/generate.py --phase baseline --model 7b --n 5
+python scripts/generate.py --phase phase1 --condition _null --model 7b --n 5
 ```
-13케이스 전체(0-B 규칙: 항상 전체 케이스 실행) × N=5(3-4: Phase 1 시작 N, 3B와 동일값
-재사용 — 3-5 "N 산정 규칙은 모델 공통"). 기존 구식 baseline(N=10, case_01~10)과 사례가
+`--n`은 필수 인자라 값 없이 실행하면 즉시 에러. 13케이스 전체(0-B 규칙: 항상 전체 케이스
+실행 — `--case`를 생략하면 자동으로 전체, 별도 지정 불필요/불가). `_null`은 D6의 통제
+조건 — 같은 GPU 세션에 묶어서 돌린다. 기존 구식 baseline(N=10, case_01~10)과 사례가
 겹치는 case_01~10 구간에서 실패 패턴이 방향성이라도 일치하는지 대조 (완전 재현은 기대하지
 않음 — 샘플링 자체가 확률적이므로).
 
 ### 2·3단계 — lang phase1 (3B, 7B)
 
 ```
-python scripts/generate.py --phase phase1 --condition lang --model 3b
-python scripts/generate.py --phase phase1 --condition lang --model 7b
+python scripts/generate.py --phase phase1 --condition lang --model 3b --n 5
+python scripts/generate.py --phase phase1 --condition lang --model 7b --n 10
 ```
-7B는 특히 "가짜 user 턴 생성" 재현율(구식 데이터 기준 3~4/10)이 신규 스키마에서도
-같은 방향으로 나오는지가 핵심 확인 대상 — 이게 재현 안 되면 `config/fixed_layers.yaml`의
-`7b: []` 결정 자체를 재검토해야 함.
+둘 다 `--case` 생략이므로 13케이스 전체 생성 (구 데이터의 10케이스와 다름 — 3B도 13케이스로
+새로 돈다는 뜻). N은 D1대로 3B=5, 7B=10 (비대칭 — 3-4상 문제 없음). 7B는 특히 "가짜 user
+턴 생성" 재현율(구식 데이터 기준 3~4/10)이 신규 스키마에서도 같은 방향으로 나오는지가 핵심
+확인 대상 — 이게 재현 안 되면 `config/fixed_layers.yaml`의 `7b: []` 결정 자체를
+재검토해야 함.
 
 ### 4단계 — 검증 기준
 
@@ -153,14 +176,29 @@ python scripts/generate.py --phase phase1 --condition lang --model 7b
 — 감사 추적(3번 항목)은 git 히스토리에도 남지만, 디렉토리 이동만으로도 "현재 유효한
 데이터가 아님"이 명확해짐. 완전 삭제는 별도로 다시 논의.
 
-## 6. 아직 열린 질문 (진행 전 확인 필요)
+## 6. Day 0 결정 (확정 — 2026-09-06)
 
-- 7B baseline·lang의 N을 3B와 동일하게 5로 시작할지, 아니면 7B가 구식 데이터에서 이미
-  "중대 사이드이펙트 재현 확인"까지 간 상태이므로 3-2 규칙상 증량된 N(예: 10, 시작 N의
-  2배)으로 바로 시작할지 — `guideline.md` 3-2는 "경계선/애매/중대 사이드이펙트가 나오면
-  그 조합만 증량"이라 규정하므로, 이미 알려진 결과가 있는 조합은 처음부터 증량 N으로
-  시작하는 게 3-2의 취지에 더 맞을 수 있음.
-- `layers/candidates/lang.md`를 만들면 `layers/candidates/`에 H와 함께 나란히 놓이는데,
-  lang은 스태킹 후보가 아니라 "이미 3B에서는 확정, 7B에서만 재검증 중"인 특수 상태다.
-  후보 파일 스키마에 이 상태를 어떻게 표시할지 (`guideline.md` 개정 없이 note로만 남길지,
-  아니면 가이드라인에 "재검증용 후보" 카테고리를 추가할지) 결정 필요.
+| # | 항목 | 결정 |
+|---|---|---|
+| D1 | 7B의 N | **분리**: 7B baseline은 N=5(사전 근거 없음, 탐색용). 7B lang은 N=10(구식 데이터에서 이미 중대 사이드이펙트 3~4/10 재현 확인됨 — 3-2 트리거가 첫 라운드에 걸릴 게 뻔해 5로 시작하면 왕복만 늘어남). 3-4가 "baseline과 후보 N은 같을 필요 없다"고 명시하므로 위반 아님 |
+| D2 | lang의 `target_cases` | **`[]`로 확정.** case_02는 넣지 않음 — H도 동일 사유로 이미 제외돼 있었음(`notes/scope-notes.md` 2026-09-04), 2026-09-06 항목에서 원인(baseline system 슬롯 부재로 인한 벤더 페르소나 자동 주입)까지 코드로 확인 완료 |
+| D3 | lang의 "재검증용 후보" 상태 기록 위치 | **`guideline.md` 비수정.** 파일 자체에도 주석 넣지 않음(위 "0단계" 주의 참고) — `notes/scope-notes.md`에만 기록, H.md와 같은 컨벤션 |
+| D4 | 판정 백로그(180건) 처리 시점 | **마이그레이션 이후 한꺼번에.** `judge.py:145`가 이미 `random.shuffle(pending)`으로 blind 셔플을 기본 동작으로 하므로, 생성을 다 끝내고 한 번에 돌리는 쪽이 이중작업을 피함 |
+| D5 | `target_cases` 모델별 분리 스키마 문제 | **별개 이슈로 유지, 이번 마이그레이션 범위 밖.** 스키마를 고쳐도 D2의 confound 자체는 안 풀림 — `harness/ablation/H/7b/md/failure_review.md` "정리 필요한 것" 참고 |
+| D6 | baseline system 슬롯 confound 통제 | **`layers/candidates/_null.md`(중립 더미, `target_cases: []`) 신설, 7B만 우선 (13케이스×N=5=65 run).** baseline 생성 코드는 안 고침(0-A 정의 유지, 기존 데이터 무효화 방지). 3B는 동일 증상 미관찰이라 보류 — 근거: `notes/scope-notes.md` 2026-09-06 항목 |
+
+경위와 근거는 전부 `notes/scope-notes.md` 2026-09-06 항목("baseline system 슬롯 부재가
+만드는 confound")에 있음. `guideline.md` 0-A/부록A에도 `chat_template_sha` 기록,
+system 슬롯 존재 여부 고정 조건이 반영됨.
+
+## 7. 총 생성량 (D1·D6 반영)
+
+| 단계 | 모델 | 조건 | 케이스 | N | run 수 |
+|---|---|---|---|---|---|
+| 1 | 7B | baseline | 13 | 5 | 65 |
+| 1' | 7B | _null (D6) | 13 | 5 | 65 |
+| 2 | 3B | lang | 13 | 5 | 65 |
+| 3 | 7B | lang | 13 | 10 | 130 |
+| **합계** | | | | | **325 run** |
+
+3B `_null`(D6 보류), 7B lang N 추가 증량(3-2 트리거 시)은 미포함.

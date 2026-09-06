@@ -1055,3 +1055,68 @@ case_01/03/04/10(7B ablation_lang)이 전부 비슷하게 3~4/10 수준으로, *
 다음 단계는 `scripts/generate.py --phase phase1 --model 3b --condition H --n 5`로 3B부터
 Phase 1 시작 (7B는 위 결정에 따라 이제 lang·H 둘 다 후보이므로 순서는 Phase 1 랭킹 이후
 결정).
+
+## 2026-09-06 업데이트 — baseline system 슬롯 부재가 만드는 confound
+
+### 발단
+
+`notes/migration-plan.md` 작성 중 lang의 `target_cases` 후보로 case_02(자기 정체성
+할루시네이션)를 검토하다가, `harness/ablation/H/7b/md/failure_review.md`가 H도 같은
+케이스를 6/10 → 0/5로 억제했다고 기록한 걸 재발견. 서로 무관한 두 후보 문구가 같은
+현상을 같은 정도로 없앴다면, 이건 "후보 내용의 효과"가 아니라 "두 조건에 공통된 조작"의
+효과일 가능성이 큼.
+
+### 메커니즘 확인 (코드 레벨)
+
+`model/inference.py:15-16`의 `if system_prompt:` 분기 — baseline은 `system_prompt`가
+`None`이라 `messages`에 system 역할 메시지가 아예 안 들어간다. 로컬 캐시의
+Qwen2.5-7B-Instruct-AWQ `tokenizer_config.json`의 `chat_template`을 직접 읽어 확인:
+
+```jinja
+{%- if messages[0]['role'] == 'system' %}
+    {{- '<|im_start|>system\n' + messages[0]['content'] + '<|im_end|>\n' }}
+{%- else %}
+    {{- '<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n' }}
+{%- endif %}
+```
+
+system 메시지가 없으면(baseline) 템플릿이 이 문구를 자동 주입한다 — case_02의 baseline
+할루시네이션 문구("저는 Qwen이고 알리바바 클라우드...")와 사실상 일치. H든 lang이든
+**내용과 무관하게** system 메시지가 있기만 하면 이 else 분기 자체가 안 타서 이 문구가
+안 들어간다.
+
+### 결론
+
+- **case_02는 H·lang 어느 쪽의 고유 효과도 아니다.** "system 슬롯이 채워져 있는가"라는
+  하네스 설계상의 이분법 하나로 설명됨. 위 2026-09-04 항목(H의 `target_cases`에서 case_02를
+  "인과 경로 불분명"으로 뺀 결정)은 정확한 판단이었고, 이번에 그 정확한 메커니즘이
+  확인된 것뿐.
+- **범위는 case_02 하나가 아니다.** baseline은 system 슬롯에 "지시 없음"이 아니라
+  "벤더 기본 페르소나"가 들어간 상태이고, 이 차이는 13개 케이스 전부·두 모델 전부에
+  적용된다(같은 Qwen2.5 계열 템플릿이므로). case_02는 그 효과가 육안으로 보이는 유일한
+  사례일 뿐. → `guideline.md` 0-A에 일반 규칙으로 추가함 (프로젝트 특수사정이 아니라
+  재사용 가능한 방법론 문제로 판단).
+- **3B에서는 동일 증상 미관찰** (위 862~874줄, baseline_1~3·lang_test_1~3 전체 확인
+  완료). 메커니즘 자체는 3B에도 동일하게 적용되지만(같은 템플릿), 정체성 문구를 실제로
+  뱉는 행동은 7B에서만 관찰됨 — confound의 "존재"와 "가시적 증상"은 별개 문제.
+
+### 결정
+
+- **D2 (lang의 target_cases, `notes/migration-plan.md`)**: `[]`로 확정. case_02를
+  넣지 않음 — H와 동일 사유.
+- **D6 (confound 통제 방법)**: baseline 생성 코드 자체는 고치지 않는다 (0-A의 baseline
+  정의 유지, 기존 baseline 전체 무효화 방지). 대신 `layers/candidates/_null.md`
+  (중립 더미: "질문에 답하세요.", `target_cases: []`)를 통제 조건으로 신설.
+  `baseline → _null` 차이 = 페르소나 제거 효과 단독, `_null → 후보` 차이 = 그 후보의
+  순수 효과.
+  - **범위는 7B만 우선 진행** (13케이스 × N=5 = 65 run). 7B baseline·lang phase1
+    재생성(`notes/migration-plan.md`)과 같은 GPU 세션에 묶어서 돌릴 수 있음.
+  - **3B는 보류.** "3B에서는 동일 증상 미관찰" 근거로, 가시적 영향이 확인되지 않은
+    상태에서 선제적으로 예산을 쓰지 않기로 함. 7B `_null` 결과에서 정체성 외 다른
+    관찰 포인트에도 페르소나 제거 효과가 유의미하게 나타나면 그때 3B도 추가한다.
+- **D5 (target_cases 모델별 분리 스키마, `harness/ablation/H/7b/md/failure_review.md`
+  "정리 필요한 것")**: 별개 문제로 유지 — 스키마를 모델별로 나눠도 이 confound 자체는
+  안 풀린다 (case_02를 "7B에서 H의 타겟"으로 올바르게 넣어도, 개선이 H 때문인지 페르소나
+  제거 때문인지는 여전히 구분 불가). 스키마 개편 논의 시 이 항목을 같이 참고할 것.
+- **부록 A / `generate.py`**: `chat_template_sha` 필드 추가. 모델 저장소 쪽 자산이라
+  런타임 버전 기록만으로는 변경을 사후에 감지할 수 없어서.

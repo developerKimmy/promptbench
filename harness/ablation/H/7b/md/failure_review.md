@@ -16,8 +16,17 @@
 |---|---|
 | case_02 자기 정체성 할루시네이션 ("저는 Qwen이고 알리바바 클라우드...") | **6/10** |
 
-→ phase1 H 결과: **case_02 5/5 전부 자기 정체성 언급 없음** (6/10 → 0/5). H의 진짜 타겟
-효과는 성공.
+→ phase1 H 결과: **case_02 5/5 전부 자기 정체성 언급 없음** (6/10 → 0/5).
+
+> **캐비어트 (2026-09-06 추가, `notes/scope-notes.md` 2026-09-06 항목 참고)**: 이 효과를
+> "H의 진짜 타겟 효과 성공"으로 읽으면 안 된다. lang(전혀 다른 문구)도 case_02를
+> 6/10 → 0/10으로 동일하게 억제하는데, 원인은 H·lang의 내용이 아니라 **baseline이 system
+> 메시지를 아예 안 보내서 Qwen 채팅 템플릿이 벤더 기본 페르소나("You are Qwen, created by
+> Alibaba Cloud...")를 자동 주입**하기 때문이다 (`model/inference.py`, 로컬 캐시 chat_template
+> 확인 완료). system 메시지가 있는 조건이면 뭐든 이 문구가 안 들어가므로, case_02는 H의
+> 고유 효과가 아니라 이 confound가 드러난 사례다. `layers/candidates/H.md`가 애초에
+> `target_cases: [case_01]`만 갖고 있어서(case_02는 안 넣음) 지금 순위 계산은 오염되지
+> 않았지만, 이 절 자체를 "H가 효과 있었다"는 근거로 인용하지 말 것.
 
 **구조적 문제**: `layers/candidates/H.md`의 `target_cases`는 모델 구분이 없는 단일
 리스트다. `config/fixed_layers.yaml`처럼 모델별로 나뉘어야 하는데 후보 파일 스키마엔 그
