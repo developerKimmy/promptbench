@@ -82,7 +82,15 @@ def run_queue(items, phase, model, rejudge):
     for condition, run, _ in items:
         case_id, run_idx = run["case_id"], run["run_idx"]
         print("-" * 60)
+        print(f"[케이스 {case_id} / 조건 {condition or 'baseline'}]\n")
         print(f"[입력]\n{run.get('_case_input', '(케이스 원문 미포함)')}\n")
+        obs = run.get("_observation_points", "")
+        if obs:
+            print(f"[관찰 포인트 — 이 케이스가 원래 확인하려는 것]\n{obs}\n")
+        if condition and run.get("system_prompt"):
+            print(f"[{condition} 지시문 — 위반 여부는 이 규칙 기준]\n{run['system_prompt']}\n")
+        elif not condition:
+            print("[baseline — 어길 후보 규칙 없음. 위반/애매/위반아님은 관찰 포인트 통과 여부로 판정]\n")
         print(f"[답변]\n{run['answer']}\n")
         try:
             judgment = prompt_judgment()
@@ -112,15 +120,25 @@ def main():
     args = parse_args()
     cases_path = ROOT / "cases" / "cases.json"
     with open(cases_path, encoding="utf-8") as f:
-        case_inputs = {c["id"]: c["input"] for c in json.load(f)}
+        all_cases = json.load(f)
+    case_inputs = {c["id"]: c["input"] for c in all_cases}
+    case_obs_points = {c["id"]: c.get("observation_points", "") for c in all_cases}
+    scored_case_ids = {c["id"] for c in all_cases if c.get("scored", True)}
 
     by_case = collect_runs(args.phase, args.model, args.condition)
 
     flat = []
+    skipped_unscored = 0
     for case_id, entries in by_case.items():
+        if case_id not in scored_case_ids:
+            skipped_unscored += len(entries)
+            continue
         for condition, run, path in entries:
             run["_case_input"] = case_inputs.get(case_id, "")
+            run["_observation_points"] = case_obs_points.get(case_id, "")
             flat.append((condition, run, path))
+    if skipped_unscored:
+        print(f"cases.json에서 scored:false인 케이스 {skipped_unscored}건은 큐에서 제외됨 (예: case_07).")
 
     if args.rejudge:
         already = []
