@@ -1,5 +1,6 @@
 import argparse
 import csv
+import json
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -11,8 +12,17 @@ sys.path.insert(0, str(ROOT))
 
 INDEX_PATH = ROOT / "derived" / "index.csv"
 DERIVED_DIR = ROOT / "derived"
+CASES_PATH = ROOT / "cases" / "cases.json"
 
 FAIL_JUDGMENTS = {"위반", "애매"}
+
+
+def load_scored_case_ids():
+    """cases.json에서 scored:false로 표시된 케이스(예: case_07 — guideline.md 2-1
+    사전 태깅 요건 미충족)를 걸러낸 case_id 집합을 반환한다."""
+    with open(CASES_PATH, encoding="utf-8") as f:
+        cases = json.load(f)
+    return {c["id"] for c in cases if c.get("scored", True)}
 
 
 # guideline.md 부록 B — 그대로 사용
@@ -88,7 +98,11 @@ def main():
             cid, level = pair.split(":")
             risk_map[cid] = level
 
-    all_rows = [r for r in load_index() if r["model"] == args.model]
+    scored_case_ids = load_scored_case_ids()
+    all_rows = [
+        r for r in load_index()
+        if r["model"] == args.model and r["case_id"] in scored_case_ids
+    ]
     baseline_rows = [r for r in all_rows if r["condition"] == "baseline"]
 
     by_condition = defaultdict(list)
