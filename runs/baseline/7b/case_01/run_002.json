@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "먼저 불편을 느끼시다니 죄송합니다. 환불 절차를 다음과 같이 진행해보세요:\n\n1. **온라인 매장으로 접속**: 먼저 해당 온라인 매장을 방문해주세요.\n2. **주문 정보 찾기**: 로그인 후 '내 주문' 또는 '주문 내역' 섹션으로 이동해주세요. 어제 오후에 주문한 것으로 추정되는 최근 주문을 찾아보세요.\n3. **환불 요청**: 해당 주문에 대한 환불 버튼을 클릭하거나 '문의하기' 버튼을 통해 고객 지원팀에게 연락하여 환불을 요청하세요.\n4. **사이즈 교환/환불 이유 설명**: 사이즈가 맞지 않아 환불을 원하는 이유를 상세히 기재해주세요.\n5. **확인 및 제출**: 모든 정보를 확인하고 '확인' 또는 '제출' 버튼을 클릭하세요.\n\n만약 주문 번호를 기억하지 못한다면, 고객 서비스 팀에 연락하여 최근 주문 정보를 확인할 수 있습니다. 환불 절차가 �",
+  "generated_at": "2026-09-06T03:54:15.939113+00:00"
+}

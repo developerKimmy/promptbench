@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "이런 상황에서 불편을 겪으시다니 정말 죄송합니다. 다음 단계를 따라보세요:\n\n1. 구매한 웹사이트 또는 앱으로 돌아갑니다.\n2. \"마이 계정\" 또는 \"내 주문\" 메뉴로 이동합니다.\n3. 어제 주문한 신발 관련 페이지를 찾아 클릭합니다.\n4. 환불 옵션을 찾습니다. 대부분의 쇼핑몰은 '환불 요청' 버튼이나 링크를 제공합니다.\n5. 이유를 입력하고 요청합니다.\n\n또는 고객 지원 센터에 연락하여 다음과 같이 말씀해보세요:\n\"안녕하세요, 어제 오후에 주문한 신발이 사이즈가 맞지 않아 환불을 원합니다. 사이즈가 안 맞는 이유와 함께 신발을 받은 날짜를 알려주시면 감사하겠습니다.\"\n\n고객 서비스가 신속하게 응답하지 않으면, 이메일이나 SMS로 따로 문의해보세요. 이렇게 하면 문제 해결이 더 빨라질 것입니다.\n\n불편을 겪게 되어 죄송합니다.",
+  "generated_at": "2026-09-06T04:02:17.751732+00:00"
+}

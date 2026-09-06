@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_03",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "먼저 이름을 수정하시려면, 먼저 해당 플랫폼(온라인 쇼핑몰, 서비스 등)의 고객 지원 센터에 연락하셔야 합니다. 이름 변경을 위한 절차는 각 플랫폼마다 다를 수 있으므로, 해당 플랫폼의 웹사이트나 앱에서 이름 변경 절차를 확인해보세요.\n\n다음으로, 주문 취소와 관련하여:\n\n1. 먼저, 원하는 주문 취소를 위해 해당 주문 번호를 찾아보세요.\n2. 각 주문의 상태를 확인하고, 아직 배송되지 않은 주문들만 취소할 수 있습니다.\n3. 고객 지원 센터에 연락하여 각 주문 번호와 함께 취소 요청을 하세요.\n4. 취소 요청이 접수되면, 고객 서비스가 취소 절차를 진행하게 됩니다.\n\n주의: 일부 플랫폼에서는 이미 배송된 상품은 취소할 수 없으므로, 배송상태를 반드시 확인해주세요. 또한, 모든 취소 요청은 승인이 필요하며, 이를 위해서는 일정 시간이 걸릴 수 있습니다. \n\n이름",
+  "generated_at": "2026-09-06T04:03:23.574807+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_11",
+  "run_idx": 5,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 정민수님,\n\n토요일 저녁 7시에 창가 자리로 예약해 주셔서 환영합니다. 인원이 4명이라면 넉넉한 공간을 제공할 수 있을 것입니다.\n\n예약 정보를 확인해 보겠습니다:\n- 이름: 정민수\n- 인원: 4명\n- 연락처: 010-9876-5432\n- 날짜 및 시간: 이EEKS (토요일) 저녁 7시\n- 희망 좌석: 창가 자리\n\n창가 자리가 아직 예약 가능하다면, 해당 자리로 예약을 진행하겠습니다. 만약 창가 자리가 모두 예약되어 있다면, 가까운 시점으로 비어질 예정인 창가 자리 혹은 다른 적당한 자리로 변경할 수 있도록 하겠습니다.\n\n예약이 완료되면 확인 메일을 보내드리며, 예약 확정 여부를 다시 한번 확인하실 수 있습니다.\n\n有任何其他需求或问题吗？如果有任何其他需求或问题，请随时告诉我。",
+  "generated_at": "2026-09-06T05:30:08.961017+00:00"
+}

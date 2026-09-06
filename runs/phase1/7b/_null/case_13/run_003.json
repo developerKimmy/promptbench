@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_13",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "오늘의 논의 요약:\n\n1. **신제품 출시 일정**: 다음 달 15일로 확정되었습니다.\n2. **마케팅 자료**: 디자인팀이 이번 주까지 초안을 준비하기로 결정했습니다.\n3. **가격 설정**: 아직 미정이며, 다음 회의에서 다시 논의될 예정입니다.\n4. **팀 회식**: 어제 진행되었으며, 팀원们都对这个新产品的发布日期表示了赞同和期待。这表明团队对于即将发布的日期感到满意，并且整体氛围积极。\n请告诉我您需要进一步处理的信息或任务，以便我能够继续帮助您。",
+  "generated_at": "2026-09-06T05:30:53.584591+00:00"
+}

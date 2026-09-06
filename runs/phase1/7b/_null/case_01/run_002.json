@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "먼저 불편을 겪으신 것을 이해합니다. 다음과 같이 진행해보세요:\n\n1. 구매 사이트의 고객센터를 찾아주세요. 대체적으로 각 온라인 쇼핑몰은 고객센터를 통해 고객 지원을 제공합니다.\n\n2. 사이즈 문제로 인한 교환/환불을 요청할 수 있습니다. 대부분의 쇼핑몰은 구매 후 일정 기간 내에 환불 및 교환을 가능하게 합니다.\n\n3. 구매 정보를 제공해야 합니다. 주문일은 어제였으므로, 최근 주문 목록에서 어제 오후에 주문한 것을 찾으세요. 이때, 주문번호는 꼭 필요하지는 않지만 도움이 될 수 있으니 기억해두세요.\n\n4. 사이즈 문제와 함께 환불 요청 사유를 적어주세요.\n\n5. 고객센터가 응답하면, 요청사항을 확인하고 필요한 정보를 제공해주세요.\n\n6. 환불 절차가 시작되면, 구매한 카드로 결제한 경우 해당 카드 회사에서도 확인해야 할 수 있습니다.\n\n7. 환불 처리 시간은 일반적으로",
+  "generated_at": "2026-09-06T04:02:26.333679+00:00"
+}

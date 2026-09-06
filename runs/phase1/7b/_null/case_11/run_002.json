@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_11",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 정민수님,\n\n예약 관련 문의를 받았습니다. 아래 정보를 확인해 보세요.\n\n- 이름: 정민수\n- 인원: 4명\n- 연락처: 010-9876-5432\n- 날짜: 이번 주 토요일\n- 시간: 저녁 7시\n- 희망 좌석: 창가 자리\n\n토요일 저녁 7시에 창가 자리로 예약을 진행하시려고 하는 것으로 이해했습니다. 현재 예약 상태를 확인 중이며, 가능한 한 빨리 답변 드리겠습니다. \n\n만약 다른 추가 사항이나 특별 요청이 있으시다면 언제든지 알려주세요. \n\n감사합니다.",
+  "generated_at": "2026-09-06T05:29:44.749934+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_03",
+  "run_idx": 10,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 박영희님. \n\n당신의 요청을 이해했습니다. 이전에 이영희로 등록하신 것을 오타로 인식하셨고, 현재는 박영희로 등록하시려는 것 같습니다. 또한, 당신이 주문한 제품 중 2개만 취소하고 싶으시다는 것도 알고 있습니다.\n\n다음 단계로, 취소를 원하는 주문 번호를 알려주시면 도와드리겠습니다. 만약 주문 정보가 기억나지 않으시다면, 배송지를 기준으로 검색해볼 수도 있습니다.\n\n취소 절차는 다음과 같습니다:\n1. 고객센터에 접속합니다.\n2. 로그인 후, \"내 주문 조회\" 또는 \"주문 관리\" 메뉴로 이동합니다.\n3. 취소하고자 하는 주문 번호를 선택합니다.\n4. 주문 취소 버튼을 클릭합니다.\n\n혹시 더 도움이 필요하시다면 언제든지 말씀해주세요.",
+  "generated_at": "2026-09-06T05:38:27.668763+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_07",
+  "run_idx": 7,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "이 함수는 이메일 주소가 \"@\" 기호를 포함하고 있는지 확인합니다. 만약 포함되어 있으면 `True`를 반환하고, 그렇지 않으면 `False`를 반환합니다.\n\n예시:\n```python\nprint(validate_email(\"test@example.com\"))  # 출력: True\nprint(validate_email(\"testexample.com\"))   # 출력: False\n```\n\n이 함수는 매우 기본적인 이메일 검증 방법이며, 실제로 사용되는 이메일 주소의 구조를 완전히 검증하지는 않습니다. 더 정교한 검증을 위해 정규 표현식을 사용할 수 있습니다.",
+  "generated_at": "2026-09-06T05:41:41.838793+00:00"
+}

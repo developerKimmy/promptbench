@@ -1,0 +1,24 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_03",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 박영희님. 주문 3개 중에서 2개를 취소하시려는 말씀ですね. 배송지가 동일하신 점 확인해주셔서 좋습니다. 취소하실 주문 번호나 상품명을 알려주시면, 조치하겠습니다.",
+  "generated_at": "2026-09-06T05:32:20.198300+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_10",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "오늘의 논의에서, 지난주 발생한 서버 장애 문제에 대한 이야기가 다시 제기되었습니다. 최종적으로는 메모리 누수가 원인임이 확인되었습니다. 이 문제는 개발팀이 다음 스프린트에서 수정하기로 결정했습니다.\n\n또한 어제는 다른 주제로 넘어갔습니다. 새로운 모니터링 대시보드를 만드는 아이디어가 제안되었습니다. 이 제안에 대해서도 개발팀이 작업을 맡기로 했습니다. 하지만 아직 구체적인 일정은 정해지지 않았습니다.",
+  "generated_at": "2026-09-06T05:43:29.735426+00:00"
+}

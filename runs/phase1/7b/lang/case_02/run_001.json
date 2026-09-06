@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_02",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 김철수님.\n\n제품이 노트북 2대(모델명: XPS15)인 것으로 알고 있습니다. 배송 요청하신 날짜는 다음 주 화요일 오전 중이며, 회사가 서울 강남구에 위치해 있다는 말씀을 들었습니다.\n\n연락처는 010-1234-5678로 하겠습니다. 배송 일정이나 기타 사항이 변경될 경우, 즉시 연락드리겠습니다.\n\n추가로 필요한 정보나 도움이 필요하시다면 언제든지 말씀해 주세요.\n\n감사합니다.",
+  "generated_at": "2026-09-06T05:36:37.943504+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_03",
+  "run_idx": 6,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 박영희님. \n\n먼저 이름을 수정하시려고 하신 것 같은데, 이름 변경을 원하신다면 해당 플랫폼의 고객 서비스에 연락하여 이름 변경을 요청하실 수 있습니다.\n\n두 번째로, 주문 취소를 원하시는 부분에 대해 말씀해주셨습니다. 각각의 주문을 확인하고 취소할 수 있는 옵션이 제공되는 경우, 취소를 원하는 주문들에 대한 정보(주문 번호 등)를 제공해 주시면 더 도움이 될 것입니다. 또한, 배송지를 변경하지 않으실 것이므로, 이를 알려주시면 도움이 될 수 있습니다.\n\n따라서, 먼저 이름 변경을 요청한 후, 취소를 원하는 주문들의 정보를 가지고 고객 서비스에 문의하시는 것이 좋을 것 같습니다.",
+  "generated_at": "2026-09-06T05:38:02.027967+00:00"
+}

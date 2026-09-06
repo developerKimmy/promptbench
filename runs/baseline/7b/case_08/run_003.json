@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_08",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "今天的会议决定采用方案A。请通知Chelu（假设这是Chelu的名字）在本周内准备三个设计草图，而Yingxi（假设这是Yingxi的名字）则需要审查预算。\n\n另外，提到上周的聚餐大家都很满意，这是一个好的团队氛围的体现。\n\n下一次会议定在下周二下午2点，请大家做好准备。如果有任何问题或需要进一步讨论的内容，可以在下次会议前告知我。",
+  "generated_at": "2026-09-06T03:58:48.356608+00:00"
+}

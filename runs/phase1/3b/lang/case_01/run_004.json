@@ -1,0 +1,24 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 4,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "환불을 원하신다면 먼저 해당 사이트나 앱에서 확인 가능한 주문 내역을 찾아보시는 것이 좋습니다. 주문 번호가 없으시다면, 주문일과 상품 이름 등을 기재하여 고객센터에 문의하시면 됩니다. 또한, 신발 사이즈가 맞지 않으셨다면, 즉시 고객센터에 연락하여 환불 절차를 진행해 보세요. 환불에 필요한 서류는 주로 수령 시 받은 배송 slip과 상품 포장을 포함합니다. 빠른 처리를 위해 지연이 있을 수 있으니 참고해 주세요.",
+  "generated_at": "2026-09-06T05:31:55.208366+00:00"
+}

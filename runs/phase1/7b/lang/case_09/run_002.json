@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_09",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "그 결정은 양쪽의 입장을 고려한 균형감 있는 접근법이라고 볼 수 있습니다. 마케팅팀의 의견은 성장과 확장을 위한 투자 필요성을 반영하고 있으며, 이는 새로운 기회와 시장 점유율을 늘리기 위한 전략일 수 있습니다. 반면, 재무팀의 견해는 회사의 재정 상태와 예측 가능한 지출을 유지하기 위한 안전한 방법을 제시합니다.\n\n동결하는 이번 분기와 함께 다음 분기의 재검토는 미래의 상황 변화를 고려할 수 있는 유연성을 제공합니다. 이렇게 하면 회사는 현재의 경제적 제약 속에서도 장기적인 목표와 성장을 추구할 수 있게 됩니다.",
+  "generated_at": "2026-09-06T05:42:37.970176+00:00"
+}

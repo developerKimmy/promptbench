@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_03",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 박영희님. \n\n먼저 이름 변경과 관련하여 불편을 끼쳐드려 죄송합니다. 3개의 주문 중 2개만 취소하고 싶으시다면, 먼저 각각의 주문 번호를 확인하시고, 그 정보를 바탕으로 다음 단계를 진행해야 합니다.\n\n1. **주문 확인**: 각 주문의 상세 정보를 확인하시기 바랍니다. 주문 번호와 주문 날짜 등을 적어둡니다.\n2. **취소 요청**: 웹사이트나 앱을 통해 해당 주문 번호를 입력하여 취소 요청을 하시면 됩니다. 대부분의 온라인몰에서는 주문 취소를 직접 할 수 있습니다.\n3. **대응 확인**: 취소 요청 후에는 고객 서비스에 문의하여 취소 상태를 확인해보세요. 배송 상태도 함께 확인해두시면 좋습니다.\n\n만약 도움이 필요하시면 고객 서비스에 연락하여 자세한 안내를 받으시길 바랍니다.",
+  "generated_at": "2026-09-06T05:37:24.943297+00:00"
+}

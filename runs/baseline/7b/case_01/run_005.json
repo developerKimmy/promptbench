@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 5,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "먼저, 불편을 겪으시다니 죄송합니다. 신발의 사이즈 문제를 해결하기 위해 다음과 같은 단계를 따라보세요:\n\n1. **구매 플랫폼 확인**: 가장 먼저, 구매한 플랫폼(예: 온라인몰, 앱 등)에 접속하여 로그인합니다.\n\n2. **주문 이력 검색**:\n   - 주문 내역을 검색하려면 \"내 주문\" 또는 \"주문 관리\" 버튼을 클릭하세요.\n   - 최근에 주문한 날짜를 기준으로 검색하면 어제 주문한 것을 찾을 수 있습니다.\n\n3. **환불 요청**:\n   - 해당 주문을 찾아 \"환불 신청\"이나 \"반품/환불 신청\" 버튼을 클릭합니다.\n   - 이유를 입력하고 필요한 사진이나 증거를 첨부할 수 있도록 지시하는 창이 나타날 것입니다. 여기서 사이즈 문제를 설명하세요.\n\n4. **판매자 연락**:\n   - 일부 플랫폼에서는 판매자에게 직접 연락해야 합니다. \"판",
+  "generated_at": "2026-09-06T03:54:46.109966+00:00"
+}

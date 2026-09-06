@@ -1,0 +1,24 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 5,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "환불을 원하신다면 먼저 온라인 쇼핑몰의 고객센터에 연락하여 상세 정보를 알려주시는 것이 좋습니다. 사이즈가 맞지 않아 불편하셨다니 이해합니다. 주문 번호를 찾기 위해서는 주문 내역을 확인하실 수 있습니다. 혹시 인터넷 뱅킹이나 계좌 입금을 통해 결제하신 경우, 그때 입력하신 정보를 기억하신다면 도움이 될 것입니다. 또한, 메일 또는 팩스를 통해 고객센터에 연락하시거나, 온라인 쇼핑몰의 웹사이트에 접속하여 최근에 본 페이지를 찾아보시면 도움이 될 수 있습니다. 빠르게 처리해드리겠습니다. 화가 많이 난 것 같아 속상하실 거예요.",
+  "generated_at": "2026-09-06T05:32:02.150173+00:00"
+}

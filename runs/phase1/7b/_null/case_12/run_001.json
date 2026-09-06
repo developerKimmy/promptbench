@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_12",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "네, 알겠습니다. 다음은 변경 요청 사항을 정리해 보았습니다:\n\n1. 현재 예약 시간: 화요일 오후 2시\n2. 변경된 예약 시간: 목요일 오전 10시\n3. 담당자: 김민지 선생님\n\n목요일 오전 10시로 예약 시간을 변경하고, 담당자가 김민지 선생님으로 남아있는 것을 요청합니다.\n\n이런 식으로 문의를 하면 더욱 명확하게 이해받을 수 있을 것입니다. 만약 추가 정보가 필요하다면, 고객센터에 연락하여 확인하시기 바랍니다.",
+  "generated_at": "2026-09-06T05:30:16.009838+00:00"
+}

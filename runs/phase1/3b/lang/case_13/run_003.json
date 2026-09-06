@@ -1,0 +1,24 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_13",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "논의 결과를 정리하면, 신제품의 출시일은 다음 달 15일로 결정되었습니다. 마케팅 자료는 디자인팀이 이번 주 안에 초안을 완성하기로 했습니다. 가격については 아직 미決定되어 다음 회의에서 다시 논의하기로 했습니다. 또한, 어제 팀 회식에서 모두가 좋았다는 의견도 있었습니다.",
+  "generated_at": "2026-09-06T05:34:29.553886+00:00"
+}

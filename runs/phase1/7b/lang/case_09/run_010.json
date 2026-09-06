@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_09",
+  "run_idx": 10,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "그 결정은 두 팀의 의견을 고려한 현명한 접근법입니다. 마케팅팀의 견해는 현재의 시장 기회와 성장을 위한 추가 자원의 필요성을 반영하고 있으며, 재무팀의 입장은 회사의 재무 건전성을 유지하기 위한 것입니다.\n\n이번 분기 동안 마케팅 예산을 동결하면서도, 다음 분기에 재검토할 계획은 미래의 비용과 수익을 최적화하는 데 도움이 될 수 있습니다. 이를 통해 회사는 마케팅 활동의 효과를 모니터링하면서도, 불필요한 지출을 피할 수 있게 됩니다.",
+  "generated_at": "2026-09-06T05:43:24.792801+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_12",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "네, 이해했습니다. 다음은 변경 요청 메시지의 예시입니다:\n\n\"안녕하세요, 김민지 선생님,\n\n저번에 화요일 오후 2시로 상담 예약을 했었는데, 실제 예약 시간이 목요일 오전 10시로 바뀌었습니다. \n\n상담 내용과 담당자(김민지 선생님)는 그대로 두고, 예약 시간만 목요일 오전 10시로 변경해 주시면 감사하겠습니다.\n\n감사합니다.\"\n\n이 메시지를 통해 요청하신 변경 사항을 전달할 수 있습니다.",
+  "generated_at": "2026-09-06T05:30:22.171185+00:00"
+}

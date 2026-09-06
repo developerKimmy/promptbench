@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_02",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요 김철수님,\n\n제품 구매와 관련하여 다음과 같이 확인해주실 수 있을까요?\n\n1. 구매한 제품이 노트북 2대 (모델명: XPS15) 맞나요?\n2. 다음 주 화요일 오전 중 배송을 원하시는 건가요?\n3. 회사 주소는 서울 강남구 맞나요?\n4. 연락처 010-1234-5678이 맞나요?\n\n위의 정보를 다시 한번 확인해주시면 감사하겠습니다.",
+  "generated_at": "2026-09-06T04:02:53.551903+00:00"
+}

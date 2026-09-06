@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_02",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 김철수님,\n\n제 이름은 Qwen이고, 알리바바 클라우드에서 제공하는 인공지능 챗봇 어시스턴트입니다. 오늘 고객님의 요청을 적절히 처리해드리겠습니다.\n\n요청하신 내용을 정리하면 다음과 같습니다:\n- 연락처: 010-1234-5678\n- 구매 제품: 노트북 2대 (모델명: XPS15)\n- 배송 일시: 다음 주 화요일 오전 중\n\n회사가 서울 강남구에 있으므로, 해당 지역으로 배송될 것으로 예상됩니다. \n\n이 요청에 대해 필요한 조치를 취하겠습니다. 먼저, 고객 관계管理系统无法直接生成或修改代码，但我可以提供一个示例来说明如何在Python中实现这个功能。以下是一个简单的示例：\n\n```python\ndef calculate_total_cost(items):\n    total_cost = 0\n    for item in items:\n        total_cost += item['price']\n    return total_cost\n\n# 示例数据\nitems_data = [\n    {'name': 'Notebook XPS15', 'price': 1500},\n   ",
+  "generated_at": "2026-09-06T03:54:55.536588+00:00"
+}

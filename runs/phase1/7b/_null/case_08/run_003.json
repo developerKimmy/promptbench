@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_08",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "好的，根据您提供的信息，我可以这样总结会议安排：\n\n- 本周决定采用A方案进行。\n- 下周内，铁柱先生需要准备3个设计草案。\n- 英희女士需要在下周内完成预算案的审查。\n- 上周的团建活动大家都很满意。\n- 下次会议定在下周二下午2点。\n\n请确认是否有需要修改的地方。",
+  "generated_at": "2026-09-06T05:27:59.622139+00:00"
+}

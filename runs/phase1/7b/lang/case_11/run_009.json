@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_11",
+  "run_idx": 9,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 정민수님. 토요일 저녁 7시에 창가 자리로 4명의 예약을 받았습니다. 전화번호 010-9876-5432로 연락이 가능하시면 확인하겠습니다. 다른 요청사항이나 추가 정보가 필요할 수 있습니다. 언제든지 연락주세요.",
+  "generated_at": "2026-09-06T05:44:55.754033+00:00"
+}

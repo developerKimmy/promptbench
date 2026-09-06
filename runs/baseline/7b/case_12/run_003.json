@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_12",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "안녕하세요, 고객님.\n\n이메일이나 문자를 통해 상담 시간을 변경해주셔서 감사합니다. 확인해 보니 실제 상담 예약 시간은 목요일 오전 10시로 정확히 맞춰져 있습니다. 김민지 선생님과 함께 하실 수 있도록 예약을 수정하였습니다.\n\n변경된 정보는 다음과 같습니다:\n- 날짜: 목요일\n- 시간: 오전 10시\n- 담당자: 김민지 선생님\n\n추가로 필요한 사항이 있으시다면 언제든 알려주시기 바랍니다. 좋은 하루 보내세요!",
+  "generated_at": "2026-09-06T04:01:00.777314+00:00"
+}

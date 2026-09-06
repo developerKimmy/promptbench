@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_04",
+  "run_idx": 6,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "이 함수는 두 숫자를 나누는 기본적인 함수입니다. 여기서 `a`는 분자를, `b`는 분모로 사용됩니다. 아래는 함수의 설명과 함께 예시를 제공합니다.\n\n```python\ndef divide(a, b):\n    \"\"\"\n    이 함수는 두 숫자를 나눕니다.\n    \n    매개변수:\n    a (float или int): 분자의 값\n    b (float 또는 int): 분모의 값\n    \n    반환값:\n    float: a를 b로 나눈 결과\n    \n    예외:\n    ZeroDivisionError: b가 0일 때 발생합니다.\n    \"\"\"\n    return a / b\n\n# 예시\nprint(divide(10, 2))  # 출력: 5.0\nprint(divide(3, 4))   # 출력: 0.75\n```\n\n이 함수를 호출할 때 주의해야 할 점은 `b`가 0일 경우 ZeroDivisionError가 발생한다는 것입니다. 이를 처리하기 위해 try-except 블록을 사용할 수 있습니다.",
+  "generated_at": "2026-09-06T05:39:04.330617+00:00"
+}

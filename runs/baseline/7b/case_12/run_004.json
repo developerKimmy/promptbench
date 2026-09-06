@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_12",
+  "run_idx": 4,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "네, 알겠습니다. 예약을 수정해드리겠습니다. 화요일 오후 2시의 예약을 목요일 오전 10시로 변경하고, 담당자도 김민지 선생님으로 그대로 두겠습니다. 아래와 같이 변경 사항을 확인해주시면 감사하겠습니다.\n\n변경 전:\n- 날짜: 화요일\n- 시간: 오후 2시\n- 담당자: 김민지 선생님\n\n변경 후:\n- 날짜: 목요일\n- 시간: 오전 10시\n- 담당자: 김민지 선생님\n\n이 정보가 맞는지 확인해 주세요. 맞다면 예약을 조정하겠습니다.",
+  "generated_at": "2026-09-06T04:01:06.444049+00:00"
+}

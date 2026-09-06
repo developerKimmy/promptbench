@@ -1,0 +1,24 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "환불을 원하시는 경우 주문하신 상품의 사이즈와 크기에 문제가 있다면, 먼저 해당 상점이나 온라인 쇼핑몰과 연락하여 문제점을 설명해주셔야 합니다. \n\n주문 번호를 찾기 위해서는, 만약에 카드 결제라면 최근의 거래 내역을 확인하시거나, 계좌 입금 시에는 입력하신 계좌번호를 통해 확인하실 수 있습니다. \n\n또는, 인터넷에서 직접 주문한 경우, 쇼핑몰 사이트에 접속하여 최근에 방문하신 기록을 찾아보시면 주문 번호를 알 수 있을 것입니다.\n\n주문 번호를 얻으신 후, 상점에 사이즈가 맞지 않아 환불을 원한다는 내용을 서면으로 보내거나 메일로 전송하시면 됩니다. 환불 절차는 일반적으로 몇 일에서 며칠 걸릴 수 있으니, 이에 대한 기다림이 길어질 것 같다면 상점과 협의를 통해 조정해보시는 것도 좋을 것 같습니다.",
+  "generated_at": "2026-09-06T05:31:42.458487+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "model": "3b",
+  "hf_id": "Qwen/Qwen2.5-3B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_06",
+  "run_idx": 5,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "코드는 리스트에서 중복된 값을 찾는 방법을 제안하고 있습니다. 이 함수는 주어진 리스트에서 중복이 있는지 확인합니다. 하지만 효율성이 떨어지는 부분이 있습니다. 반복문을 줄여 효율성을 높일 수 있습니다.",
+  "generated_at": "2026-09-06T05:33:03.769674+00:00"
+}

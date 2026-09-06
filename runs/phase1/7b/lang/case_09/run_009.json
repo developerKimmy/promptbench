@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_09",
+  "run_idx": 9,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "그런 상황에서 양쪽 팀의 입장을 고려하는 것이 중요합니다. 마케팅팀의 입장에서는 예산 증가가 효과적인 마케팅 활동을 위한 필수 요소일 수 있습니다. 그러나 재무팀의 견해도 존중할 필요가 있습니다. 이분기 동안 예산을 동결하면서도, 다음 분기에 다시 검토할 수 있는 기회를 주는 것은 좋은 해결책으로 보입니다. 이렇게 하면 마케팅팀이 현재의 예산으로 최대한의 효과를 낼 수 있는 반면, 재무팀도 지출을 통제할 수 있게 됩니다.",
+  "generated_at": "2026-09-06T05:43:19.458301+00:00"
+}

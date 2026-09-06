@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_13",
+  "run_idx": 6,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "오늘의 논의 내용을 정리하면 다음과 같습니다:\n\n1. 신제품의 출시일은 다음 달 15일로 확정되었습니다.\n2. 마케팅 자료의 초안은 디자인팀이 이번 주까지 준비하기로 했습니다.\n3. 가격은 아직 결정되지 않았으며, 다음 회의에서 다시 논의하기로 했습니다.\n4. 어제 팀 회식에서는 모두가 신제품에 대해 긍정적인 반응을 보였다는 점을 참고해야 합니다.\n\n이 내용을 바탕으로 진행하시면 좋을 것 같습니다.",
+  "generated_at": "2026-09-06T05:45:59.032133+00:00"
+}

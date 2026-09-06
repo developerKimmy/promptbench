@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_10",
+  "run_idx": 4,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "오늘 논의된 내용을 요약하면 다음과 같습니다:\n\n1. **서버 장애 관련 논의**\n   - **이슈**: 서버 장애에 대한 논의가 다시 제기되었습니다.\n   - **결과**: 메모리 누수가 원인으로 확인되었습니다.\n   - **추진**: 개발팀이 이를 해결하기 위해 패치 작업을 다음 스프린트에 포함시킬 계획입니다.\n\n2. **모니터링 대시보드 관련 논의**\n   - **이슈**: 모니터링 대시보드를 새로 만들자는 의견이 제시되었습니다.\n   - **결과**: 이 의견도 개발팀이 추진하기로 결정했습니다.\n   - **추진**: 현재 일정은 미정 상태입니다.\n\n이러한 내용들이 오늘 회의에서 주요 논의 사항이었습니다.",
+  "generated_at": "2026-09-06T05:29:24.956355+00:00"
+}

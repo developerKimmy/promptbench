@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_10",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "오늘 논의된 내용을 요약하면 다음과 같습니다:\n\n1. **서버 장애 문제**: \n   - 지난 주 발생했던 서버 장애에 대한 논의가 재개되었습니다.\n   - 결론적으로, 서버 장애의 근본 원인은 메모리 누수가 확인되었습니다.\n   - 개발팀이 이를 해결하기 위해 다음 스프린트에 패치 작업을 할 계획이라고 밝혔습니다.\n\n2. **모니터링 대시보드**:\n   - 어제는 새로운 모니터링 대시보드를 만드는 의견이 제기되었습니다.\n   - 이 제안은 개발팀이 맡기로 결정했으나, 아직 구체적인 일정은 확정되지 않았습니다.\n\n이러한 내용들이 오늘 회의에서 논의된 주요 사항들입니다.",
+  "generated_at": "2026-09-06T03:59:54.323565+00:00"
+}

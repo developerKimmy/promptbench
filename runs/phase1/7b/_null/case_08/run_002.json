@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_08",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "알겠습니다. 회의 내용을 요약하면 다음과 같습니다:\n\n1. A안으로 진행하기로 결정했습니다.\n2. 철수님: 다음 주까지 디자인 시안 3개 준비\n3. 영희님: 예산안 검토\n4. 지난 주 회식: 모든 참석자가 만족했음\n\n다음 회의는 다다음 주 화요일 오후 2시입니다.\n\n이 정보를 바탕으로 할 일 목록은 다음과 같습니다:\n- 철수님에게 디자인 시안 작업을 배정\n- 영희님에게 예산 검토 작업을 배정\n- 회의 일정을 정리\n\n추가적인 사항이나 작업이 필요한지 확인하시기 바랍니다.",
+  "generated_at": "2026-09-06T05:27:56.581878+00:00"
+}

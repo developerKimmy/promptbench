@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "baseline",
+  "condition": null,
+  "fixed_layer": false,
+  "case_id": "case_08",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": null,
+  "max_new_tokens": 256,
+  "answer": "오늘 회의의 결론을 정리해보겠습니다:\n\n1. A안으로 회의를 진행하기로 결정했습니다.\n2. 철수님: 다음 주까지 디자인 시안 3개를 준비해주세요.\n3. 영희님: 예산안을 검토해주세요.\n4. 회식에 대한 피드백: 지난주 회식은 다들 만족하셨습니다.\n5. 다음 회의 일정: 다다음 주 화요일 오후 2시입니다.\n\n이런 점들을 기록하고 다음 주회의 준비를 위해 필요한 사항들을 확인하시면 좋을 것 같습니다. 추가적으로 필요한 것이 있거나 변경사항이 있다면 알려주시기 바랍니다.",
+  "generated_at": "2026-09-06T03:58:45.189654+00:00"
+}

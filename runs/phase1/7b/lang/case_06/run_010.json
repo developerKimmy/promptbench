@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_06",
+  "run_idx": 10,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "이 함수는 리스트에 중복된 요소가 있는지 확인합니다. 하지만 이 구현은 시간 복잡도가 O(n^2)로 매우 비효율적입니다. 더 효율적인 방법으로는 집합을 사용하는 것입니다.\n\n다음은 개선된 버전의 함수입니다:\n\n```python\ndef has_duplicates(lst):\n    seen = set()\n    for item in lst:\n        if item in seen:\n            return True\n        seen.add(item)\n    return False\n```\n\n이 버전의 함수는 시간 복잡도가 O(n)이므로 더 빠릅니다. 집합을 사용하여 이미 보았던 요소들을 확인하고, 중복이 있는 경우 즉시 반환합니다.",
+  "generated_at": "2026-09-06T05:41:06.460530+00:00"
+}

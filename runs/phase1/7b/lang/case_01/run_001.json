@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 1,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "먼저 불편을 겪으신 것을 이해합니다. 다음과 같은 절차를 따라보세요:\n\n1. 구매한 플랫폼의 고객센터 웹사이트나 앱으로 접속합니다.\n2. \"고객 서비스\" 또는 \"문의하기\" 버튼을 클릭합니다.\n3. 문제를 선택하거나 직접 문제를 설명합니다. \"사이즈 교환/환불\"을 선택하면 됩니다.\n4. 필요한 정보를 입력합니다:\n   - 구매일: 어제 오후\n   - 제품 정보: 신발 모델명이나 색상\n5. 원인을 설명합니다: 사이즈가 맞지 않아 환불을 원합니다.\n6. 요청을 제출합니다.\n\n또는 전화로도 문의할 수 있습니다. 고객센터 번호를 찾아 연락하시면 더욱 빠른 해결이 가능할 것입니다.\n\n추가적인 도움이 필요하시다면 언제든지 말씀해주세요.",
+  "generated_at": "2026-09-06T05:35:23.179937+00:00"
+}

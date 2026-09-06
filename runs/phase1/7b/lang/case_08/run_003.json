@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_08",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "오늘 회의에서 A안으로 진행하기로 결정했습니다. 다음 주까지 철수님이 디자인 시안 3개를 준비하고, 영희님은 예산안을 검토해주세요. 참고로 지난주 회식은 다들 만족하셨다고 하네요. 다음 회의는 다다음 주 화요일 오후 2시입니다.",
+  "generated_at": "2026-09-06T05:42:04.500481+00:00"
+}

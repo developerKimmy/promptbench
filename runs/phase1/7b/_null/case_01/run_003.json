@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "_null",
+  "fixed_layer": false,
+  "case_id": "case_01",
+  "run_idx": 3,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "질문에 답하세요.",
+  "max_new_tokens": 256,
+  "answer": "죄송합니다. 불편을 겪게 yourselves 해서. 다음과 같은 단계를 따르면 신발의 사이즈 문제를 해결하실 수 있습니다:\n\n1. 구매한 웹사이트나 앱에서 로그인 하세요.\n2. '마이 계정' 또는 '주문历史记录' 탭으로 이동하세요.\n3. 어제 주문한 신발과 관련된 주문을 찾으시고, 주문 번호를 기록해두세요.\n4. 고객 서비스 센터로 연락하시거나, 해당 웹사이트의 \"고객 지원\" 링크를 클릭하여 온라인으로 문의하세요.\n5. 환불을 원하는 이유와 함께 주문 번호와 상품 정보를 제공하십시오.\n\n고객 서비스 직원이 사이즈 문제를 확인한 후, 환불 절차를 시작할 수 있습니다. 일반적으로 환불은 7-10일 내로 이루어지며, 반환된 상품이 검사된 후에 이루어집니다.\n\n화가 날 때는 이해하지만, 이러한 문제는 흔히 발생하므로 침착하게 대처하시는 것이 좋습니다",
+  "generated_at": "2026-09-06T04:02:34.791784+00:00"
+}

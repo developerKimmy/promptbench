@@ -1,0 +1,24 @@
+{
+  "model": "7b",
+  "hf_id": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "quant": "AWQ 4bit",
+  "runtime_version": "5.16.1",
+  "chat_template_sha": "cd8e9439f057",
+  "phase": "phase1",
+  "condition": "lang",
+  "fixed_layer": false,
+  "case_id": "case_04",
+  "run_idx": 2,
+  "target_flag": false,
+  "gen_params": {
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "repetition_penalty": 1.05
+  },
+  "system_prompt": "항상 한국어로만 답변하세요. 영어, 한자, 일본어, 중국어 단어를 섞지 마세요.",
+  "max_new_tokens": 256,
+  "answer": "이 함수는 두 숫자를 나누는 기능을 합니다. 아래는 해당 함수의 설명입니다:\n\n```python\ndef divide(a, b):\n    \"\"\"\n    이 함수는 두 숫자 a와 b를 받아 b로 나눈 값을 반환합니다.\n    \n    :param a: 나눌 수 (분자)\n    :param b: 나눌 수 (분모)\n    :return: a / b의 결과\n    \"\"\"\n    return a / b\n```\n\n이 함수는 주로 숫자를 나누는 연산에 사용됩니다. 다만 분모가 0인 경우 발생하는 ZeroDivisionError를 고려해야 합니다.",
+  "generated_at": "2026-09-06T05:38:38.182062+00:00"
+}
